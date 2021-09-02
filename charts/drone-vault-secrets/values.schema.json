@@ -122,10 +122,6 @@
       "$id": "#/properties/affinity",
       "type": "object"
     },
-    "rbac": {
-      "$id": "#/properties/rbac",
-      "type": "object"
-    },
     "extraSecretNamesForEnvFrom": {
       "$id": "#/properties/extraSecretNamesForEnvFrom",
       "type": "array"
