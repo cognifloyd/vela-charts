@@ -19,7 +19,9 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-## This chart always creates a unique serviceAccount to add appropriate Role/RoleBinding.
+## This chart always creates a unique serviceAccount to add a RoleBinding to the
+## system:auth-delegator ClusterRole. The kubernetes vault auth method needs this to access
+## the TokenReview API: https://www.vaultproject.io/docs/auth/kubernetes#configuring-kubernetes
 serviceAccount:
   # The name is generated using the fullname template
   # Annotations to add to the service account
