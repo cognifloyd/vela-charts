@@ -75,20 +75,20 @@
     "serviceAccount": {
       "$id": "#/properties/serviceAccount",
       "type": "object",
-	  "required": [
-		  "name",
-		  "create"
-	  ],
-	  "properties": {
-		  "name": {
-			  "$id": "#/properties/serviceAccount/name",
-			  "type": "string"
-		  },
-		  "create": {
-			  "$id": "#/properties/serviceAccount/create",
-			  "type": "boolean"
-		  }
-	  } 
+      "required": [
+        "name",
+        "create"
+      ],
+      "properties": {
+        "name": {
+          "$id": "#/properties/serviceAccount/name",
+          "type": "string"
+        },
+        "create": {
+          "$id": "#/properties/serviceAccount/create",
+          "type": "boolean"
+        }
+      }
     },
     "podAnnotations": {
       "$id": "#/properties/podAnnotations",
