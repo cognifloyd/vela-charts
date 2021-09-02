@@ -1,6 +1,34 @@
 apiVersion: v1
 entries:
   drone:
+  - apiVersion: v2
+    appVersion: 2.2.0
+    created: "2021-09-02T22:46:19.278500748Z"
+    description: Drone is a self-service Continuous Delivery platform for busy development
+      teams
+    digest: c4654f5c7a2a7c38ef73d2397f6ebfc31c8c9f2b5ce0c4f43b430c3a598a3782
+    home: https://drone.io/
+    icon: https://docs.drone.io/logo.svg
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - drone
+    - drone.io
+    - go
+    kubeVersion: ^1.13.0-0
+    maintainers:
+    - email: hello@drone.io
+      name: Drone
+    name: drone
+    sources:
+    - https://github.com/drone/drone
+    - https://github.com/drone/charts
+    type: application
+    urls:
+    - https://cognifloyd.github.io/drone-charts/drone-0.2.0.tgz
+    version: 0.2.0
   - apiVersion: v1
     appVersion: 1.9.0
     created: "2021-07-27T09:31:36.886980027Z"
@@ -110,6 +138,33 @@ entries:
     - https://charts.drone.io/drone-0.1.3.tgz
     version: 0.1.3
   drone-kubernetes-secrets:
+  - apiVersion: v2
+    appVersion: 1.2.0
+    created: "2021-09-02T22:46:19.284870522Z"
+    description: A Kubernetes Secrets extension for Drone
+    digest: 52dc6dc07baf73336ffe6972d1adbc96053fcc28366016a95893baad31d7e336
+    home: https://docs.drone.io/runner/extensions/kube/
+    icon: https://docs.drone.io/logo.svg
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - drone
+    - drone.io
+    - go
+    kubeVersion: ^1.13.0-0
+    maintainers:
+    - email: hello@drone.io
+      name: Drone
+    name: drone-kubernetes-secrets
+    sources:
+    - https://github.com/drone/drone-kubernetes-secrets
+    - https://github.com/drone/charts
+    type: application
+    urls:
+    - https://cognifloyd.github.io/drone-charts/drone-kubernetes-secrets-0.2.0.tgz
+    version: 0.2.0
   - apiVersion: v1
     appVersion: 1.0.0
     created: "2021-07-27T09:31:36.888929884Z"
@@ -163,6 +218,33 @@ entries:
     - https://charts.drone.io/drone-kubernetes-secrets-0.1.0.tgz
     version: 0.1.0
   drone-runner-kube:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2021-09-02T22:46:19.287240779Z"
+    description: The Drone Kubernetes runner launches builds in Kubernetes Jobs
+    digest: c54c8131bb16ae92234e99ef24dc46464c8af7bc4b45a2bf3771e03c1072855e
+    home: https://docs.drone.io/runner/kubernetes/
+    icon: https://docs.drone.io/logo.svg
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - drone
+    - drone.io
+    - go
+    kubeVersion: ^1.13.0-0
+    maintainers:
+    - email: hello@drone.io
+      name: Drone
+    name: drone-runner-kube
+    sources:
+    - https://github.com/drone-runners/drone-runner-kube
+    - https://github.com/drone/charts
+    type: application
+    urls:
+    - https://cognifloyd.github.io/drone-charts/drone-runner-kube-0.2.0.tgz
+    version: 0.2.0
   - apiVersion: v1
     appVersion: 1.0.0
     created: "2021-07-27T09:31:36.889825439Z"
@@ -267,4 +349,4 @@ entries:
     urls:
     - https://charts.drone.io/drone-runner-kube-0.1.2.tgz
     version: 0.1.2
-generated: "2021-07-27T09:31:36.885775452Z"
+generated: "2021-09-02T22:46:19.275858088Z"
