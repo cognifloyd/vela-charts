@@ -52,9 +52,19 @@ podLabels: {}
 
 updateStrategy: {}
 
-# Listener port. Must be changed >1024 when securityContext set to runAsNonRoot
-# When changed, remember to set env variable DRONE_SERVER_PORT=<port>
-port: 80
+## Exposed drone container ports.
+## This may be used to add an https port or to adjust the container
+## port when drene is not listening on the default port.
+## Make sure to add the https port if you add TLS support by setting
+## DRONE_TLS_AUTOCERT or DRONE_TLS_CERT/DRONE_TLS_KEY in env.
+## You must expose an alternative port by changing http and/or https here
+## if you set DRONE_SERVER_PORT=:<port> in env, which configures drone
+## to listen on that alternate port.
+## TIP: ports must be >1024 when securityContext set to runAsNonRoot
+ports:
+  # Setting a port to 0 will disable adding that port.
+  http: 80
+  https: 443
 
 service:
   type: ClusterIP

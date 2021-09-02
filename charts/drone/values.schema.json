@@ -106,6 +106,22 @@
       "$id": "#/properties/podLabels",
       "type": "object"
     },
+    "ports": {
+      "$id": "#/properties/ports",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "http": {
+          "$id": "#/properties/ports/properties/http",
+          "type": "integer"
+        },
+        "https": {
+          "$id": "#/properties/ports/properties/https",
+          "type": "integer"
+        }
+      }
+    },
     "service": {
       "$id": "#/properties/service",
       "type": "object",

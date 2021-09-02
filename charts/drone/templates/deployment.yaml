@@ -40,13 +40,27 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
+            {{- if get .Values.ports "http" }}
             - name: http
-              containerPort: {{ .Values.port }}
+              containerPort: {{ .Values.ports.http }}
               protocol: TCP
+            {{- end }}
+            {{/* only include https port if TLS is enabled */}}
+            {{- if and (get .Values.ports "https") (or (hasKey .Values.env "DRONE_TLS_AUTOCERT") (hasKey .Values.env "DRONE_TLS_CERT")) }}
+            - name: https
+              containerPort: {{ .Values.ports.https }}
+              protocol: TCP
+            {{- end }}
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              {{- if or (hasKey .Values.env "DRONE_TLS_AUTOCERT") (hasKey .Values.env "DRONE_TLS_CERT") }}
+              port: {{ .Values.ports.https }}
+              scheme: HTTPS
+              {{- else }}
+              port: {{ .Values.ports.http }}
+              scheme: HTTP
+              {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           envFrom:
