@@ -3,10 +3,10 @@ entries:
   drone:
   - apiVersion: v2
     appVersion: 2.2.0
-    created: "2021-09-02T22:46:19.278500748Z"
+    created: "2021-09-02T23:05:51.812480297Z"
     description: Drone is a self-service Continuous Delivery platform for busy development
       teams
-    digest: c4654f5c7a2a7c38ef73d2397f6ebfc31c8c9f2b5ce0c4f43b430c3a598a3782
+    digest: 05dea516d072dccd21fd78d2512267bd432ed23d50f2e599695ecb02c0503dad
     home: https://drone.io/
     icon: https://docs.drone.io/logo.svg
     keywords:
@@ -140,9 +140,9 @@ entries:
   drone-kubernetes-secrets:
   - apiVersion: v2
     appVersion: 1.2.0
-    created: "2021-09-02T22:46:19.284870522Z"
+    created: "2021-09-02T23:05:51.813261415Z"
     description: A Kubernetes Secrets extension for Drone
-    digest: 52dc6dc07baf73336ffe6972d1adbc96053fcc28366016a95893baad31d7e336
+    digest: 9099853d8dcdeca93c8bba94fdcd820c11857a93c910dac6d8287b354c51eeb0
     home: https://docs.drone.io/runner/extensions/kube/
     icon: https://docs.drone.io/logo.svg
     keywords:
@@ -220,9 +220,9 @@ entries:
   drone-runner-kube:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2021-09-02T22:46:19.287240779Z"
+    created: "2021-09-02T23:05:51.814197815Z"
     description: The Drone Kubernetes runner launches builds in Kubernetes Jobs
-    digest: c54c8131bb16ae92234e99ef24dc46464c8af7bc4b45a2bf3771e03c1072855e
+    digest: d25d228ce90245f10bf3db6bed6d423cce1d9573a01b98a39619b925491d8284
     home: https://docs.drone.io/runner/kubernetes/
     icon: https://docs.drone.io/logo.svg
     keywords:
@@ -349,4 +349,32 @@ entries:
     urls:
     - https://charts.drone.io/drone-runner-kube-0.1.2.tgz
     version: 0.1.2
-generated: "2021-09-02T22:46:19.275858088Z"
+  drone-vault-secrets:
+  - apiVersion: v2
+    appVersion: 1.2.0
+    created: "2021-09-02T23:05:51.814905756Z"
+    description: A Vault Secrets extension for Drone
+    digest: ef734e3314c0687de6c77b27b65515e748a7360464bdd9e33ce4765a23d325f7
+    home: https://docs.drone.io/runner/extensions/vault/
+    icon: https://docs.drone.io/logo.svg
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - drone
+    - drone.io
+    - go
+    kubeVersion: ^1.13.0-0
+    maintainers:
+    - email: hello@drone.io
+      name: Drone
+    name: drone-vault-secrets
+    sources:
+    - https://github.com/drone/drone-vault
+    - https://github.com/drone/charts
+    type: application
+    urls:
+    - https://cognifloyd.github.io/drone-charts/drone-vault-secrets-0.2.0.tgz
+    version: 0.2.0
+generated: "2021-09-02T23:05:51.810985878Z"
