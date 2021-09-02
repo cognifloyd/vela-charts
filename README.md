@@ -1,6 +1,6 @@
 # Drone Helm Charts
 
-This repository hosts official [Helm](https://helm.sh/) charts for [Drone](https://drone.io/). These charts are used to deploy Drone to Kubernetes.
+This repository hosts cognifloyd's fork of the Official [Helm](https://helm.sh/) charts for [Drone](https://drone.io/). These charts are used to deploy Drone to Kubernetes.
 
 ## Install Helm
 
