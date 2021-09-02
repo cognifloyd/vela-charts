@@ -4,6 +4,10 @@ metadata:
   name: {{ include "drone-kubernetes-secrets.fullname" . }}
   labels:
     {{- include "drone-kubernetes-secrets.labels" . | nindent 4 }}
+  {{- if .Values.serviceAccount.annotations }}
+  annotations:
+    {{- toYaml .Values.serviceAccount.annotations | nindent 4 }}
+  {{- end }}
   {{- if .Values.serviceAccount.pullSecret }}
   imagePullSecrets:
   - name: "{{ .Values.serviceAccount.pullSecret }}"
