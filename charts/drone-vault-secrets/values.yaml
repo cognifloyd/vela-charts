@@ -72,7 +72,7 @@ extraSecretNamesForEnvFrom: []
 
 ## The keys within the "env" map are mounted as environment variables on the secrets extension pod.
 ##
-env:
+env: {}
   ## REQUIRED: Shared secret value for comms between the Kubernetes runner and this secrets plugin.
   ## Must match the value set in the runner's env.DRONE_SECRET_PLUGIN_TOKEN.
   ## Ref: https://kube-runner.docs.drone.io/installation/reference/drone-secret-plugin-token/
