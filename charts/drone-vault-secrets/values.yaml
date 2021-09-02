@@ -1,6 +1,6 @@
 image:
   repository: drone/vault
-  tag: latest
+  tag: 1.2.0
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
 

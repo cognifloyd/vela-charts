@@ -2,11 +2,11 @@ apiVersion: v2
 name: drone-runner-kube
 description: The Drone Kubernetes runner launches builds in Kubernetes Jobs
 type: application
-version: 0.1.6
+version: 0.2.0
 appVersion: 1.0.0
 kubeVersion: "^1.13.0-0"
-home: https://kube-runner.docs.drone.io/
-icon: https://drone.io/apple-touch-icon.png
+home: https://docs.drone.io/runner/kubernetes/
+icon: https://docs.drone.io/logo.svg
 keywords:
   - continuous-delivery
   - continuous-deployment
@@ -17,7 +17,7 @@ keywords:
   - go
 sources:
   - https://github.com/drone-runners/drone-runner-kube
-  - https://github.com/drone/helm
+  - https://github.com/drone/charts
 maintainers:
   - name: Drone
     email: hello@drone.io

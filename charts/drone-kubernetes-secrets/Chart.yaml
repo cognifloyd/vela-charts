@@ -2,11 +2,11 @@ apiVersion: v2
 name: drone-kubernetes-secrets
 description: A Kubernetes Secrets extension for Drone
 type: application
-version: 0.1.1
-appVersion: 1.0.0
+version: 0.2.0
+appVersion: 1.2.0
 kubeVersion: "^1.13.0-0"
-home: https://github.com/drone/drone-kubernetes-secrets
-icon: https://drone.io/apple-touch-icon.png
+home: https://docs.drone.io/runner/extensions/kube/
+icon: https://docs.drone.io/logo.svg
 keywords:
   - continuous-delivery
   - continuous-deployment
@@ -17,7 +17,7 @@ keywords:
   - go
 sources:
   - https://github.com/drone/drone-kubernetes-secrets
-  - https://github.com/drone/helm
+  - https://github.com/drone/charts
 maintainers:
   - name: Drone
     email: hello@drone.io
