@@ -3,10 +3,10 @@ entries:
   drone:
   - apiVersion: v2
     appVersion: 2.2.0
-    created: "2021-09-02T23:23:13.302872707Z"
+    created: "2021-09-02T23:35:06.140231368Z"
     description: Drone is a self-service Continuous Delivery platform for busy development
       teams
-    digest: 4b1b2f16976adf5f31d98e9254a3e8f5ebf109fdd681269cb55522b51ba539a2
+    digest: fb53d29872c899a2d272dbe4f69316a3e3b67253b0be9b840f3d80a22656bc68
     home: https://drone.io/
     icon: https://docs.drone.io/logo.svg
     keywords:
@@ -140,9 +140,9 @@ entries:
   drone-kubernetes-secrets:
   - apiVersion: v2
     appVersion: 1.2.0
-    created: "2021-09-02T23:23:13.303705332Z"
+    created: "2021-09-02T23:35:06.141065175Z"
     description: A Kubernetes Secrets extension for Drone
-    digest: e34ff5e58e577f151d1880e2fa6e647254bb04975b250201f8778b57e7981bb5
+    digest: 6a0c4cfe0325a178e2a29d5e18065bb919ad530715a7b625732f553b3cd90b1d
     home: https://docs.drone.io/runner/extensions/kube/
     icon: https://docs.drone.io/logo.svg
     keywords:
@@ -220,9 +220,9 @@ entries:
   drone-runner-kube:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2021-09-02T23:23:13.304584785Z"
+    created: "2021-09-02T23:35:06.142051148Z"
     description: The Drone Kubernetes runner launches builds in Kubernetes Jobs
-    digest: 36a30319227a7b9ac3d42f7a399b5d3ed221bf930ba9258a9d19facf1e4a3c38
+    digest: 6f0c1cb52bb6fefe2bd43d7cad973ff97a311c9f945875b17289fefe77aef4f8
     home: https://docs.drone.io/runner/kubernetes/
     icon: https://docs.drone.io/logo.svg
     keywords:
@@ -352,9 +352,9 @@ entries:
   drone-vault-secrets:
   - apiVersion: v2
     appVersion: 1.2.0
-    created: "2021-09-02T23:23:13.305328793Z"
+    created: "2021-09-02T23:35:06.142793063Z"
     description: A Vault Secrets extension for Drone
-    digest: c96c4876addae7933d48dae458edd2b71eb4b2094ad0d1df584ba620311d2391
+    digest: f829b75626a19baafe03f39d1aa6088bf698597cc7e8c056e90a12bd2c58ce7d
     home: https://docs.drone.io/runner/extensions/vault/
     icon: https://docs.drone.io/logo.svg
     keywords:
@@ -377,4 +377,4 @@ entries:
     urls:
     - https://cognifloyd.github.io/drone-charts/drone-vault-secrets-0.2.0.tgz
     version: 0.2.0
-generated: "2021-09-02T23:23:13.300342931Z"
+generated: "2021-09-02T23:35:06.137549536Z"
