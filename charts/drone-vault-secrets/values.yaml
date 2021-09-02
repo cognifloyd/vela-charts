@@ -98,3 +98,19 @@ env:
   ## Vault related parameter
   ## For more information about Vault extension parameter, you can take a look here:
   ## https://github.com/drone/drone-vault
+  ## https://www.vaultproject.io/docs/commands#environment-variables
+  ##
+  # VAULT_ADDR: vault-example.local
+  ##
+  ## Examples of various auth types (use extraSecretNamesForEnvFrom above for these):
+  ## (example values from https://learn.hashicorp.com/tutorials/vault/getting-started-apis)
+  ##
+  # VAULT_AUTH_TYPE: kubernetes
+  # VAULT_KUBERNETES_ROLE: drone
+  ##
+  # VAULT_AUTH_TYPE: approle
+  # VAULT_APPROLE_ID: 3c301960-8a02-d776-f025-c3443d513a18
+  # VAULT_APPROLE_SECRET: 22d1e0d6-a70b-f91f-f918-a0ee8902666b
+  ##
+  # VAULT_AUTH_TYPE: token
+  # VAULT_TOKEN: s.Ga5jyNq6kNfRMVQk2LY1j9iu
