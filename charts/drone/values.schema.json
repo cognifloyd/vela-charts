@@ -87,6 +87,10 @@
         "create": {
           "$id": "#/properties/serviceAccount/create",
           "type": "boolean"
+        },
+        "annotations": {
+          "$id": "#/properties/serviceAccount/annotations",
+          "type": "object"
         }
       }
     },
