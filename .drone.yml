@@ -43,17 +43,17 @@ steps:
     branch:
     - main
 
-- name: publish
-  image: lucap/drone-netlify
-  pull: if-not-exists
-  settings:
-    path: ./docs
-    site_id:
-      from_secret: netlify_site_id
-    token:
-      from_secret: netlify_token
-  when:
-    event:
-    - push
-    branch:
-    - main
+#- name: publish
+#  image: lucap/drone-netlify
+#  pull: if-not-exists
+#  settings:
+#    path: ./docs
+#    site_id:
+#      from_secret: netlify_site_id
+#    token:
+#      from_secret: netlify_token
+#  when:
+#    event:
+#    - push
+#    branch:
+#    - main
