@@ -55,6 +55,16 @@ updateStrategy: {}
 service:
   type: ClusterIP
   port: 80
+  # all ports use protocol: TCP
+  ports:
+    http:
+      # helm templating is supported for each of the values here.
+      port: "{{ .Values.service.port }}"
+      targetPort: http
+  # You may want to add https if you have configured drone to serve TLS.
+  #  https:
+  #    port: 443
+  #    targetPort: https
   annotations: {}
 
 ingress:
