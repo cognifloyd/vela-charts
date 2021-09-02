@@ -13,38 +13,12 @@ metadata:
   - name: "{{ .Values.serviceAccount.pullSecret }}"
   {{- end }}
 
-{{/* A Role is created for the namespace specified in rbac.secretNamespace. */}}
 ---
-{{ if .Values.rbac.enabled -}}
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: {{ include "drone-vault-secrets.fullname" . }}
-  namespace: {{ .Values.rbac.secretNamespace | quote }}
-  labels:
-    {{- include "drone-vault-secrets.labels" . | nindent 4 }}
-rules:
-  - apiGroups:
-    - ""
-    resources:
-    - secrets
-  {{ if .Values.rbac.restrictToSecrets }}
-    resourceNames:
-    {{- toYaml .Values.rbac.restrictToSecrets | nindent 6 }}
-  {{ end }}
-    verbs:
-    - get
-    - watch
-{{ end -}}
-
-{{/* The role gets bound to the runner's ServiceAccount in the secret namespace. */}}
----
-{{ if .Values.rbac.enabled -}}
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: {{ include "drone-vault-secrets.fullname" . }}
-  namespace: {{ .Values.rbac.secretNamespace | quote }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "drone-vault-secrets.labels" . | nindent 4 }}
 subjects:
@@ -52,7 +26,8 @@ subjects:
   name: {{ include "drone-vault-secrets.fullname" . }}
   namespace: {{ .Release.Namespace }}
 roleRef:
-  kind: Role
-  name: {{ include "drone-vault-secrets.fullname" . }}
+  # The kubernetes vault auth method needs its ServiceAccount to have access to the TokenReview API
+  # https://www.vaultproject.io/docs/auth/kubernetes#configuring-kubernetes
+  kind: ClusterRole
+  name: system:auth-delegator
   apiGroup: rbac.authorization.k8s.io
-{{ end -}}
