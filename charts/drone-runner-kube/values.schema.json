@@ -149,6 +149,16 @@
       "$id": "#/properties/affinity",
       "type": "object"
     },
+    "serviceAccount": {
+      "$id": "#/properties/serviceAccount",
+      "type": "object",
+      "properties": {
+        "pullSecret": {
+          "$id": "#/properties/serviceAccount/properties/pullSecret",
+          "type": "string"
+        }
+      }
+    },
     "rbac": {
       "$id": "#/properties/rbac",
       "type": "object"

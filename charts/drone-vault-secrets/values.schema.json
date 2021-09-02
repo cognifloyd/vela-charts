@@ -99,6 +99,10 @@
         "annotations": {
           "$id": "#/properties/serviceAccount/properties/annotations",
           "type": "object"
+        },
+        "pullSecret": {
+          "$id": "#/properties/serviceAccount/properties/pullSecret",
+          "type": "string"
         }
       }
     },

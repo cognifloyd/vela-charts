@@ -4,6 +4,10 @@ metadata:
   name: {{ include "drone-runner-kube.fullname" . }}
   labels:
     {{- include "drone-runner-kube.labels" . | nindent 4 }}
+  {{- if .Values.serviceAccount.pullSecret }}
+  imagePullSecrets:
+  - name: "{{ .Values.serviceAccount.pullSecret }}"
+  {{- end }}
 
 {{/* A Role is created for every namespace we want to run builds in. */}}
 {{- $root := . }}

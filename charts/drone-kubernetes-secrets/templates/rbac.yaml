@@ -4,6 +4,10 @@ metadata:
   name: {{ include "drone-kubernetes-secrets.fullname" . }}
   labels:
     {{- include "drone-kubernetes-secrets.labels" . | nindent 4 }}
+  {{- if .Values.serviceAccount.pullSecret }}
+  imagePullSecrets:
+  - name: "{{ .Values.serviceAccount.pullSecret }}"
+  {{- end }}
 
 {{/* A Role is created for the namespace specified in rbac.secretNamespace. */}}
 ---
