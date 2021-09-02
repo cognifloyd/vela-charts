@@ -19,7 +19,7 @@ steps:
   image: appleboy/drone-git-push
   pull: if-not-exists
   settings:
-    branch: master
+    branch: main
     remote: git@github.com:drone/charts.git
     commit: true
     commit_message: update charts [CI SKIP]
@@ -29,7 +29,7 @@ steps:
     event:
     - push
     branch:
-    - master
+    - main
 
 - name: publish
   image: lucap/drone-netlify
@@ -44,4 +44,4 @@ steps:
     event:
     - push
     branch:
-    - master
+    - main
