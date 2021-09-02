@@ -16,6 +16,10 @@ steps:
   commands:
   - apk add --update make
   - make publish
+  when:
+    event:
+    - push
+    - pull_request
 
 - name: push lint
   image: quay.io/helmpack/chart-testing:v3.0.0-beta.1
@@ -25,7 +29,7 @@ steps:
     event:
     - push
     branch:
-    - master
+    - main
 
 - name: push
   image: appleboy/drone-git-push
