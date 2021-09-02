@@ -32,7 +32,8 @@ steps:
   pull: if-not-exists
   settings:
     branch: main
-    remote: git@github.com:drone/charts.git
+    #remote: git@github.com:drone/charts.git
+    remote: git@github.com:cognifloyd/drone-charts.git
     commit: true
     commit_message: update charts [CI SKIP]
     ssh_key:
