@@ -81,19 +81,19 @@
       ],
       "properties": {
         "name": {
-          "$id": "#/properties/serviceAccount/name",
+          "$id": "#/properties/serviceAccount/properties/name",
           "type": "string"
         },
         "create": {
-          "$id": "#/properties/serviceAccount/create",
+          "$id": "#/properties/serviceAccount/properties/create",
           "type": "boolean"
         },
         "annotations": {
-          "$id": "#/properties/serviceAccount/annotations",
+          "$id": "#/properties/serviceAccount/properties/annotations",
           "type": "object"
         },
         "pullSecret": {
-          "$id": "#/properties/serviceAccount/pullSecret",
+          "$id": "#/properties/serviceAccount/properties/pullSecret",
           "type": "string"
         }
       }
@@ -127,6 +127,10 @@
         "port": {
           "$id": "#/properties/service/properties/port",
           "type": "integer"
+        },
+        "annotations": {
+          "$id": "#/properties/service/properties/annotations",
+          "type": "object"
         }
       }
     },
