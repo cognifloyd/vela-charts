@@ -92,6 +92,16 @@
         }
       }
     },
+    "serviceAccount": {
+      "$id": "#/properties/serviceAccount",
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "$id": "#/properties/serviceAccount/properties/annotations",
+          "type": "object"
+        }
+      }
+    },
     "resources": {
       "$id": "#/properties/resources",
       "type": "object"

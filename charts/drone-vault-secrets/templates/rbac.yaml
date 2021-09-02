@@ -4,6 +4,10 @@ metadata:
   name: {{ include "drone-vault-secrets.fullname" . }}
   labels:
     {{- include "drone-vault-secrets.labels" . | nindent 4 }}
+  {{- if .Values.serviceAccount.annotations }}
+  annotations:
+    {{- toYaml .Values.serviceAccount.annotations | nindent 4 }}
+  {{- end }}
 
 {{/* A Role is created for the namespace specified in rbac.secretNamespace. */}}
 ---
