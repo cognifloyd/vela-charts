@@ -51,14 +51,3 @@ app.kubernetes.io/name: {{ include "drone.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/component: server
 {{- end -}}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "drone.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create -}}
-    {{ default (include "drone.fullname" .) .Values.serviceAccount.name }}
-{{- else -}}
-    {{ default "default" .Values.serviceAccount.name }}
-{{- end -}}
-{{- end -}}
