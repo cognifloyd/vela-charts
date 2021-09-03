@@ -43,6 +43,11 @@ spec:
             - name: http
               containerPort: 3000
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+              scheme: HTTP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           envFrom:
