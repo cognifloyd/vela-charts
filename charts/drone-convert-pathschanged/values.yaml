@@ -1,0 +1,100 @@
+image:
+  repository: meltwater/drone-convert-pathschanged
+  tag: 0.5.0
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+
+## If you need to pull images from a private Docker image repository, pass in the name
+## of a Kubernetes Secret that contains the needed secret. For more details, see:
+## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+##
+imagePullSecrets: []
+# - name: "image-pull-secret"
+
+## For small or experimental deployments of the convert extension, 1 replica will suffice.
+## For production cases, 2-3 are recommended. This does not grant additional parallelism,
+## but does ensure that upgrades, config changes, and disruptions are handled more gracefully.
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+## If you need to run drone under a specific kubernetes service account, pass in
+## the name and any annotations here.
+## If you need the service account created, set create: to true
+## Annotations are added to service account only when create: true.
+serviceAccount:
+  name: default
+  create: false
+  annotations: {}
+  # Fallback image pull secret.
+  # If a pod does not have pull secrets, k8s will use the service account's pull secrets.
+  # See: https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#serviceaccount-admission-controller
+  # pullSecret: "your-pull-secret"
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 3000
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+## If you'd like to provide your own Kubernetes Secret object instead of passing your values
+## in un-encrypted, pass in the name of a created + populated Secret in the same Namespace
+## as the pod. All secrets within this configmap will be mounted as environment variables,
+## with each key/value mapping to a corresponding environment variable on the pod.
+##
+extraSecretNamesForEnvFrom: []
+# - my-drone-secrets
+
+## The keys within the "env" map are mounted as environment variables on the conversion extension pod.
+##
+env: {}
+  ## REQUIRED: Shared secret value for comms between the Drone server and this conversion extension.
+  ## Must match the value set in the Drone server's env.DRONE_CONVERT_PLUGIN_SECRET.
+  ## Ref: https://docs.drone.io/server/reference/drone-convert-plugin-secret/
+  ## This is commented out in order to leave you the ability to set the
+  ## key via a separately provisioned secret (see existingSecretName above).
+  ##
+  # DRONE_SECRET:
+
+  ## The Conversion extension needs to query the git provider to get the list of changed files.
+  ## The extension only supports github and bitbucket right now.
+  ## You need to set the PROVIDER and create a TOKEN to communicate with the provider.
+  ## (The provider auth is separate from the credentials used by the Drone server)
+
+  ## GitHub. See the docs about github token generation (including required scope) here:
+  ## Ref: https://github.com/meltwater/drone-convert-pathschanged#github
+  ##
+  # PROVIDER: github
+  # TOKEN: 9e6eij3ckzvpe9mrhnqcis6zf8dhopmm46e3pi96
+
+  ## Bitbucket. See the docs about access token generation here:
+  ## Ref: https://github.com/meltwater/drone-convert-pathschanged#bitbucket-server
+  ##
+  # PROVIDER: bitbucket-server
+  # TOKEN: 9e6eij3ckzvpe9mrhnqcis6zf8dhopmm46e3pi96

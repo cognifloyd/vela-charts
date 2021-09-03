@@ -10,3 +10,4 @@ A nonexhaustive overview of the charts:
 * [drone-runner-kube](drone-runner-kube/README.md) - The Kubernetes runner for Drone
 * [drone-kubernetes-secrets](drone-kubernetes-secrets/README.md) - The Kubernetes secrets extension for Drone
 * [drone-vault-secrets](drone-vault-secrets/README.md) - The Vault secrets extension for Drone
+* [drone-convert-pathschanged](drone-convert-pathschanged/README.md) - The "Paths Changed" Conversion extension for Drone
