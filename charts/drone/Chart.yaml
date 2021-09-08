@@ -2,7 +2,7 @@ apiVersion: v2
 name: drone
 description: Drone is a self-service Continuous Delivery platform for busy development teams
 type: application
-version: 0.2.0
+version: 0.2.1
 appVersion: 2.2.0
 kubeVersion: "^1.13.0-0"
 home: https://drone.io/

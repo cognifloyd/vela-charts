@@ -10,8 +10,8 @@ spec:
   type: {{ .Values.service.type }}
   ports:
   {{- range $key, $val := .Values.service.ports }}
-    - port: {{ tpl $val.port $ }}
-      targetPort: {{ tpl $val.targetPort $ }}
+    - port: {{ if kindIs "string" $val.port }}{{ tpl $val.port $ }}{{ else }}{{ $val.port }}{{ end }}
+      targetPort: {{ if kindIs "string" $val.targetPort }}{{ tpl $val.targetPort $ }}{{ else }}{{ $val.targetPort }}{{ end }}
       protocol: TCP
       name: {{ $key }}
   {{- end }}
