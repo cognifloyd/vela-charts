@@ -9,8 +9,8 @@ metadata:
     {{- toYaml .Values.serviceAccount.annotations | nindent 4 }}
   {{- end }}
   {{- if .Values.serviceAccount.pullSecret }}
-  imagePullSecrets:
-  - name: "{{ .Values.serviceAccount.pullSecret }}"
+imagePullSecrets:
+- name: "{{ .Values.serviceAccount.pullSecret }}"
   {{- end }}
 
 {{/* A Role is created for the namespace specified in rbac.secretNamespace. */}}
