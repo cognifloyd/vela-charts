@@ -93,6 +93,7 @@ env: {}
   ## (example values from https://learn.hashicorp.com/tutorials/vault/getting-started-apis)
   ##
   # VAULT_AUTH_TYPE: kubernetes
+  # VAULT_AUTH_MOUNT_POINT: kubernetes
   # VAULT_KUBERNETES_ROLE: drone
   ##
   # VAULT_AUTH_TYPE: approle
