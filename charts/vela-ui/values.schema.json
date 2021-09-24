@@ -142,21 +142,12 @@
     "env": {
       "$id": "#/properties/env",
       "type": "object",
+      "required": ["VELA_API"],
       "properties": {
-        "DRONE_SECRET": {
-          "$id": "#/properties/env/properties/DRONE_SECRET",
+        "VELA_API": {
+          "$id": "#/properties/env/properties/VELA_API",
           "type": "string",
-          "minLength": 1
-        },
-        "PROVIDER": {
-          "$id": "#/properties/env/properties/PROVIDER",
-          "type": "string",
-          "minLength": 1
-        },
-        "TOKEN": {
-          "$id": "#/properties/env/properties/TOKEN",
-          "type": "string",
-          "minLength": 1
+          "minLength": 3
         }
       }
     }

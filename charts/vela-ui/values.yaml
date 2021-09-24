@@ -1,6 +1,6 @@
 image:
-  repository: meltwater/drone-convert-pathschanged
-  tag: 0.5.0
+  repository: target/vela-ui
+  tag: v0.10.0
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
 
@@ -19,7 +19,7 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-## If you need to run drone under a specific kubernetes service account, pass in
+## If you need to run Vela UI under a specific kubernetes service account, pass in
 ## the name and any annotations here.
 ## If you need the service account created, set create: to true
 ## Annotations are added to service account only when create: true.
@@ -47,7 +47,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 3000
+  port: 80
 
 resources: {}
   # limits:
@@ -69,32 +69,22 @@ affinity: {}
 ## with each key/value mapping to a corresponding environment variable on the pod.
 ##
 extraSecretNamesForEnvFrom: []
-# - my-drone-secrets
+# - my-vela-secrets
 
 ## The keys within the "env" map are mounted as environment variables on the conversion extension pod.
 ##
-env: {}
-  ## REQUIRED: Shared secret value for comms between the Drone server and this conversion extension.
-  ## Must match the value set in the Drone server's env.DRONE_CONVERT_PLUGIN_SECRET.
-  ## Ref: https://docs.drone.io/server/reference/drone-convert-plugin-secret/
-  ## This is commented out in order to leave you the ability to set the
-  ## key via a separately provisioned secret (see existingSecretName above).
-  ##
-  # DRONE_SECRET:
+env:
+  ## REQUIRED!
+  ## Vela api server address. Should match the "VELA_ADDR" value provided to vela-server.
+  ## Defaults to the "vela-server" service that the vela-server Chart creates by default.
+  ## Usage: Vela server address as a fully qualified url (<scheme>://<host>)
+  VELA_API: http://vela-server
 
-  ## The Conversion extension needs to query the git provider to get the list of changed files.
-  ## The extension only supports github and bitbucket right now.
-  ## You need to set the PROVIDER and create a TOKEN to communicate with the provider.
-  ## (The provider auth is separate from the credentials used by the Drone server)
+  ## customize the location where you want users to provide feedback
+  # VELA_FEEDBACK_URL: https://go-vela/community/issues/new/choose
 
-  ## GitHub. See the docs about github token generation (including required scope) here:
-  ## Ref: https://github.com/meltwater/drone-convert-pathschanged#github
-  ##
-  # PROVIDER: github
-  # TOKEN: 9e6eij3ckzvpe9mrhnqcis6zf8dhopmm46e3pi96
+  ## customize the location where you users can review documentation
+  # VELA_DOCS_URL: https://go-vela.github.io/docs
 
-  ## Bitbucket. See the docs about access token generation here:
-  ## Ref: https://github.com/meltwater/drone-convert-pathschanged#bitbucket-server
-  ##
-  # PROVIDER: bitbucket-server
-  # TOKEN: 9e6eij3ckzvpe9mrhnqcis6zf8dhopmm46e3pi96
+  ## setting this to "development" turns on dev mode
+  # NODE_ENV:
