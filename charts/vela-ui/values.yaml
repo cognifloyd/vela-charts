@@ -40,8 +40,8 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
-  # TODO: allow changing targetPort (8888 is hard-coded afaik in the image)
-  targetPort: 8888
+  # TODO: allow changing targetPort (requires changing nginx config)
+  targetPort: 80
   # TODO: allow using https (requires changing nginx config)
   # scheme should be http or https.
   # If you use https, make sure to specify mount them with extraVolumes.
