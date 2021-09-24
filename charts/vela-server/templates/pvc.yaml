@@ -8,8 +8,8 @@ metadata:
 {{ toYaml .Values.persistentVolume.annotations | indent 4 }}
   {{- end }}
   labels:
-    {{- include "drone.labels" . | nindent 4 }}
-  name: {{ template "drone.fullname" . }}
+    {{- include "vela-server.labels" . | nindent 4 }}
+  name: {{ template "vela-server.fullname" . }}
 spec:
   accessModes:
 {{ toYaml .Values.persistentVolume.accessModes | indent 4 }}

@@ -10,11 +10,13 @@ image:
 imagePullSecrets: []
 # - name: "image-pull-secret"
 
+## For small or experimental deployments of the Vela server, 1 replica will suffice.
+## For production cases, 2-3 are recommended. This does not grant additional parallelism,
+## but does ensure that upgrades, config changes, and disruptions are handled more gracefully.
+replicaCount: 1
+
 nameOverride: ""
 fullnameOverride: ""
-
-# Drone server does not interact with the Kubernetes API server
-automountServiceAccountToken: false
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -45,40 +47,16 @@ serviceAccount:
 ##
 podAnnotations: {}
 #  prometheus.io/scrape: "true"
-#  prometheus.io/port: "80"
+#  prometheus.io/port: "8080"
 
 ## Add extra labels to the Vela server pods here.
 podLabels: {}
 
 updateStrategy: {}
 
-## Exposed drone container ports.
-## This may be used to add an https port or to adjust the container
-## port when drene is not listening on the default port.
-## Make sure to add the https port if you add TLS support by setting
-## DRONE_TLS_AUTOCERT or DRONE_TLS_CERT/DRONE_TLS_KEY in env.
-## You must expose an alternative port by changing http and/or https here
-## if you set DRONE_SERVER_PORT=:<port> in env, which configures drone
-## to listen on that alternate port.
-## TIP: ports must be >1024 when securityContext set to runAsNonRoot
-ports:
-  # Setting a port to 0 will disable adding that port.
-  http: 80
-  https: 443
-
 service:
   type: ClusterIP
   port: 80
-  # all ports use protocol: TCP
-  ports:
-    http:
-      # helm templating is supported for each of the values here.
-      port: "{{ .Values.service.port }}"
-      targetPort: http
-  # You may want to add https if you have configured drone to serve TLS.
-  #  https:
-  #    port: 443
-  #    targetPort: https
   annotations: {}
 
 ingress:
@@ -135,7 +113,8 @@ persistentVolume:
   ## Ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
   ##
   accessModes:
-    - ReadWriteOnce
+    # all nodes need access to the sqlite db
+    - ReadWriteMany
 
   ## Vela server data Persistent Volume annotations
   ##
@@ -147,11 +126,13 @@ persistentVolume:
   ##
   existingClaim: ""
 
-  ## Drone server data Persistent Volume mount root path
+  ## Vela server data Persistent Volume mount root path
+  ## TODO: this may need to be a different path for Vela. For now, include in database address
   ##
   mountPath: /data
 
-  ## Drone server data Persistent Volume size
+  ## Vela server data Persistent Volume size
+  ## TODO: validate this for vela
   ##
   size: 8Gi
 
@@ -224,15 +205,16 @@ env:
   ##
   # VELA_WEBUI_ADDR: https://chart-ui-example.local
 
-  ## REQUIRED!
   ## You need to configure the queue that the server will use to pass work to the workers.
   ##
   ## Options: redis (stubs: kafka)
   ## Usage: driver to be used for the queue
   VELA_QUEUE_DRIVER: redis
   ##
+  ## REQUIRED!
+  ## Make sure to adjust this if your redis host/cluster is not accessible on host "redis"
   ## Usage: fully qualified url (<scheme>://<host>) for the queue
-  # VELA_QUEUE_ADDR:
+  VELA_QUEUE_ADDR: redis://redis:6379
   ##
   ## Usage: enables connecting to a queue cluster
   # VELA_QUEUE_CLUSTER:
@@ -247,10 +229,11 @@ env:
   ##
   ## Options: sqlite3, postgres
   ## Usage: driver to be used for the database system
-  # VELA_DATABASE_DRIVER: "sqlite3"
+  VELA_DATABASE_DRIVER: "sqlite3"
   ##
   ## Usage: fully qualified url (<scheme>://<host>) for the database
-  # VELA_DATABASE_ADDR: "vela.sqlite"
+  ## For sqlite, see the URI Filename examples section in: https://www.sqlite.org/c3ref/open.html
+  VELA_DATABASE_ADDR: "file:///data/vela.sqlite"
 
   ## If you are going to store build secrets in the Vela database, it is suggested that
   ## you set a database encryption secret. This must be set before any secrets are stored
