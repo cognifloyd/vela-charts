@@ -16,7 +16,7 @@ keywords:
   - go-vela
   - go
 sources:
-  - https://github.com/go-vela/woerker
+  - https://github.com/go-vela/worker
 maintainers:
   - name: Jacob Floyd
     email: cognifloyd@gmail.com

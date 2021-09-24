@@ -1,46 +1,42 @@
-# Drone "Paths Changed" Conversion extension
+# Vela UI
 
-[Drone](http://drone.io/) is a Continuous Integration platform built on container technology.
+[Vela](http://go-vela.github.io/docs/) is a Pipeline Automation (CI/CD) framework built on Linux container technology written in Golang.
 
-This Chart is for installing the [Paths Changed Conversion extension](https://github.com/meltwater/drone-convert-pathschanged) for Drone.
+This Chart is for installing the Vela UI.
 
-## Installing "Paths Changed" Conversion extension
+## Installing Vela UI
 
-See the [drone-convert-pathschanged chart installation guide](./docs/install.md).
+See the [vela-ui chart installation guide](./docs/install.md).
 
-## Configuring "Paths Changed" Conversion extension
+## Configuring Vela UI
 
 See [values.yaml](values.yaml) to see the Chart's default values.
 
-To adjust an existing Drone install's configuration:
+To adjust an existing Vela install's configuration:
 
 ```console
 # If you have a values file:
-helm upgrade drone-convert-pathschanged drone/drone-convert-pathschanged --namespace drone --values drone-convert-pathschanged-values.yaml
+helm upgrade vela-ui vela/vela-ui --namespace vela --values vela-ui-values.yaml
 # If you want to change one value and don't have a values file:
-helm upgrade drone-convert-pathschanged drone/drone-convert-pathschanged --namespace drone --reuse-values --set someKey=someVal
+helm upgrade vela-ui vela/vela-ui --namespace vela --reuse-values --set someKey=someVal
 ```
 
-## Upgrading "Paths Changed" Conversion extension
+## Upgrading Vela UI
 
-Read the [release notes](https://discourse.drone.io/c/announcements/6) to make sure there are no backwards incompatible changes. Make adjustments to your values as needed, then run `helm upgrade`:
+Read the [release notes](https://github.com/go-vela/community/blob/master/migrations/v0.9/README.md) to make sure there are no backwards incompatible changes. Make adjustments to your values as needed, then run `helm upgrade`:
 
 ```console
-# This pulls the latest version of the drone chart from the repo.
+# This pulls the latest version of the vela chart from the repo.
 help repo update
-helm upgrade drone-convert-pathschanged drone/drone-convert-pathschanged --namespace drone --values drone-convert-pathschanged-values.yaml
+helm upgrade vela-ui vela/vela-ui --namespace vela --values vela-ui-values.yaml
 ```
 
-## Uninstalling "Paths Changed" Conversion extension
+## Uninstalling Vela UI
 
-To uninstall/delete the `drone` deployment in the `drone` namespace:
+To uninstall/delete the `vela-ui` deployment in the `vela` namespace:
 
 ```console
-helm delete drone-convert-pathschanged --namespace drone
+helm delete vela-ui --namespace vela
 ```
 
 Substitute your values if they differ from the examples. See `helm delete --help` for a full reference on `delete` parameters and flags.
-
-## Support
-
-For questions, suggestions, and discussion, visit the [Drone community site](https://discourse.drone.io/).
