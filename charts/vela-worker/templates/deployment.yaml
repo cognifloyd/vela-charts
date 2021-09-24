@@ -1,3 +1,4 @@
+{{/* TODO: multiple workers with one service (for dns) per worker */}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,7 +6,9 @@ metadata:
   labels:
     {{- include "vela-worker.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  # Each worker needs a unique identity in VELA_WORKER_ADDR.
+  # So, each worker is essentially a singleton.
+  replicas: 1
   selector:
     matchLabels:
       {{- include "vela-worker.selectorLabels" . | nindent 6 }}
@@ -43,18 +46,20 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            # TODO: worker supports serving https if certs are provided
-            - name: http
-              containerPort: 8080 # TODO: get port from .Values.env.VELA_WORKER_ADDR
-              {{/* regexSplit ":" (get (urlParse .Values.env.VELA_WORKER_ADDR) "host" 1 */}}
+            - name:  {{ .Values.service.scheme | lower }}
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /health
-              port: 8080 # TODO: get port from .Values.env.VELA_WORKER_ADDR
-              scheme: HTTP # TODO: HTTPS
+              port: {{ .Values.service.port }}
+              scheme: {{ .Values.service.scheme | upper }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: VELA_WORKER_ADDR
+              {{/* TODO: multiple workers needs different template for service name */}}
+              value: {{ .Values.service.scheme }}://{{ include "vela-worker.fullname" }}:{{ .Values.service.port }}
           envFrom:
             - configMapRef:
                 name: {{ include "vela-worker.fullname" . }}
