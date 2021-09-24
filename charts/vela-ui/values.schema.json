@@ -97,24 +97,11 @@
       "$id": "#/properties/serviceAccount",
       "type": "object",
       "required": [
-        "name",
-        "create"
+        "name"
       ],
       "properties": {
         "name": {
           "$id": "#/properties/serviceAccount/properties/name",
-          "type": "string"
-        },
-        "create": {
-          "$id": "#/properties/serviceAccount/properties/create",
-          "type": "boolean"
-        },
-        "annotations": {
-          "$id": "#/properties/serviceAccount/properties/annotations",
-          "type": "object"
-        },
-        "pullSecret": {
-          "$id": "#/properties/serviceAccount/properties/pullSecret",
           "type": "string"
         }
       }

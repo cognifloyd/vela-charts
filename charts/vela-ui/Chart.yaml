@@ -1,5 +1,5 @@
 apiVersion: v2
-name: drone-convert-pathschanged
+name: vela-ui
 description: UI for Vela (Target's official Pipeline Automation Framework)
 type: application
 version: 0.1.0
