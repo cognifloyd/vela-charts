@@ -40,9 +40,9 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
-  # TODO: allow changing targetPort (requires changing nginx config)
+  # To change targetPort or scheme, you will need a custom image.
+  # Customize the nginx conf in that image to change these.
   targetPort: 80
-  # TODO: allow using https (requires changing nginx config)
   # scheme should be http or https.
   # If you use https, make sure to specify mount them with extraVolumes.
   scheme: http
