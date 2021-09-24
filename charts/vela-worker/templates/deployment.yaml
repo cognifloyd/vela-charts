@@ -60,6 +60,14 @@ spec:
             - name: VELA_WORKER_ADDR
               {{/* TODO: multiple workers needs different template for service name */}}
               value: {{ .Values.service.scheme }}://{{ include "vela-worker.fullname" }}:{{ .Values.service.port }}
+              {{/*
+                 or maybe we can use
+                 valueFrom:
+                   fieldRef:
+                     fieldPath: metadata.name
+                     or spec.nodeName, status.podIP, status.podIPs
+                 but we still need a way to compose this. Can env vars use ${} for shell substitution?
+               */}}
           envFrom:
             - configMapRef:
                 name: {{ include "vela-worker.fullname" . }}
