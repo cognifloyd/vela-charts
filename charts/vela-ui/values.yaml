@@ -43,6 +43,8 @@ service:
   # TODO: allow changing targetPort (8888 is hard-coded afaik in the image)
   targetPort: 8888
   # TODO: allow using https (requires changing nginx config)
+  # scheme should be http or https.
+  # If you use https, make sure to specify mount them with extraVolumes.
   scheme: http
 
 resources: {}
@@ -59,6 +61,17 @@ tolerations: []
 
 affinity: {}
 
+## If you'd like to make additional files or volumes available to the worker, declare additional
+## Volumes here per the Pod spec's "volumes" section.
+## Ref: https://kubernetes.io/docs/concepts/storage/volumes/
+##
+extraVolumes: []
+## If you have declared extra volumes, mount them here, per the Pod Container's
+## "volumeMounts" section.
+##
+extraVolumeMounts: []
+#
+extraVolumeMounts: []
 ## If you'd like to provide your own Kubernetes Secret object instead of passing your values
 ## in un-encrypted, pass in the name of a created + populated Secret in the same Namespace
 ## as the pod. All secrets within this configmap will be mounted as environment variables,
