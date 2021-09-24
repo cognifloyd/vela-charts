@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "drone-convert-pathschanged.fullname" . }}
+  name: {{ include "vela-ui.fullname" . }}
   labels:
-    {{- include "drone-convert-pathschanged.labels" . | nindent 4 }}
+    {{- include "vela-ui.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "drone-convert-pathschanged.selectorLabels" . | nindent 6 }}
+      {{- include "vela-ui.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "drone-convert-pathschanged.selectorLabels" . | nindent 8 }}
+        {{- include "vela-ui.selectorLabels" . | nindent 8 }}
       annotations:
         checksum/secrets: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       {{- if .Values.podAnnotations }}
@@ -27,25 +27,25 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: server
+        - name: ui
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
-              containerPort: 3000
+            - name: {{ .Values.service.scheme | lower }}
+              containerPort: {{ .Values.service.targetPort }}
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /healthz
-              port: 3000
-              scheme: HTTP
+              path: /health
+              port: {{ .Values.service.targetPort }}
+              scheme: {{ .Values.service.scheme | upper }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           envFrom:
             - configMapRef:
-                name: {{ include "drone-convert-pathschanged.fullname" . }}
+                name: {{ include "vela-ui.fullname" . }}
           {{- range .Values.extraSecretNamesForEnvFrom }}
             - secretRef:
                 name: {{ . }}
