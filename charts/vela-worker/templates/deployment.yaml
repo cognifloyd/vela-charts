@@ -46,6 +46,7 @@ spec:
             # TODO: worker supports serving https if certs are provided
             - name: http
               containerPort: 8080 # TODO: get port from .Values.env.VELA_WORKER_ADDR
+              {{/* regexSplit ":" (get (urlParse .Values.env.VELA_WORKER_ADDR) "host" 1 */}}
               protocol: TCP
           livenessProbe:
             httpGet:

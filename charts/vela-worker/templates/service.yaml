@@ -6,6 +6,8 @@ metadata:
     {{- include "vela-worker.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
+  # headless service
+  clusterIP: "None"
   ports:
     - port: {{ .Values.service.port }}
       targetPort: http
