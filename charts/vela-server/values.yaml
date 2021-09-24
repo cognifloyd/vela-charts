@@ -1,6 +1,6 @@
 image:
-  repository: drone/drone
-  tag: 2.2.0
+  repository: target/vela-server
+  tag: v0.9.2
   pullPolicy: IfNotPresent
 
 ## If you need to pull images from a private Docker image repository, pass in the name
@@ -27,7 +27,7 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-## If you need to run drone under a specific kubernetes service account, pass in
+## If you need to run vela-server under a specific kubernetes service account, pass in
 ## the name and any annotations here.
 ## If you need the service account created, set create: to true
 ## Annotations are added to service account only when create: true.
@@ -40,14 +40,14 @@ serviceAccount:
   # See: https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#serviceaccount-admission-controller
   # pullSecret: "your-pull-secret"
 
-## Add extra annotations to the Drone server pods here. See below example for
+## Add extra annotations to the Vela server pods here. See below example for
 ## Prometheus scrape annotations.
 ##
 podAnnotations: {}
 #  prometheus.io/scrape: "true"
 #  prometheus.io/port: "80"
 
-## Add extra labels to the Drone server pods here.
+## Add extra labels to the Vela server pods here.
 podLabels: {}
 
 updateStrategy: {}
@@ -103,7 +103,7 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-## If you'd like to force the Drone server to run on a specific node or set of nodes,
+## If you'd like to force the Vela server to run on a specific node or set of nodes,
 ## set a selector here.
 ##
 nodeSelector: {}
@@ -112,7 +112,7 @@ tolerations: []
 
 affinity: {}
 
-## If you'd like to make additional files or volumes available to Drone, declare additional
+## If you'd like to make additional files or volumes available to vela-server, declare additional
 ## Volumes here per the Pod spec's "volumes" section.
 ## Ref: https://kubernetes.io/docs/concepts/storage/volumes/
 ##
@@ -123,25 +123,25 @@ extraVolumes: []
 extraVolumeMounts: []
 
 persistentVolume:
-  ## If you are using SQLite as your DB for Drone, it is recommended to enable persistence. If
+  ## If you are using SQLite as your DB for Vela, it is recommended to enable persistence. If
   ## enabled, the Chart will create a PersistentVolumeClaim to store its state in. If you are
   ## using a DB other than SQLite, set this to false to avoid allocating unused storage.
-  ## If set to false, Drone will use an emptyDir instead, which is ephemeral.
+  ## If set to false, Vela will use an emptyDir instead, which is ephemeral.
   ##
   enabled: true
 
-  ## Drone server data Persistent Volume access modes
+  ## Vela server data Persistent Volume access modes
   ## Must match those of existing PV or dynamic provisioner
   ## Ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
   ##
   accessModes:
     - ReadWriteOnce
 
-  ## Drone server data Persistent Volume annotations
+  ## Vela server data Persistent Volume annotations
   ##
   annotations: {}
 
-  ## If you'd like to bring your own PVC for persisting Drone state, pass the name of the
+  ## If you'd like to bring your own PVC for persisting Vela state, pass the name of the
   ## created + ready PVC here. If set, this Chart will not create the default PVC.
   ## Requires server.persistentVolume.enabled: true
   ##
@@ -155,7 +155,7 @@ persistentVolume:
   ##
   size: 8Gi
 
-  ## Drone server data Persistent Volume Storage Class
+  ## Vela server data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
   ## If undefined (the default) or set to null, no storageClassName spec is
@@ -164,19 +164,19 @@ persistentVolume:
   ##
   storageClass: ""
 
-  ## Drone server data Persistent Volume Binding Mode
+  ## Vela server data Persistent Volume Binding Mode
   ## If defined, volumeMode: <volumeMode>
   ## If empty (the default) or set to null, no volumeBindingMode spec is
   ## set, choosing the default mode.
   ##
   volumeMode: ""
 
-  ## Subdirectory of Drone server data Persistent Volume to mount
+  ## Subdirectory of Vela server data Persistent Volume to mount
   ## Useful if the volume's root directory is not empty
   ##
   subPath: ""
 
-## If persistentVolume.enabled is set to false, Drone will mount an emptyDir instead of
+## If persistentVolume.enabled is set to false, vela-server will mount an emptyDir instead of
 ## a PVC for any state that it needs to persist.
 ##
 emptyDir:
@@ -185,97 +185,198 @@ emptyDir:
 
 ## If you'd like to provide your own Kubernetes Secret object instead of passing your values
 ## in un-encrypted, pass in the name of a created + populated Secret in the same Namespace
-## as the Drone server. All secrets within this configmap will be mounted as environment
+## as the Vela server. All secrets within this configmap will be mounted as environment
 ## variables, with each key/value mapping to a corresponding environment variable on the
-## Drone server.
+## Vela server.
 ##
 extraSecretNamesForEnvFrom: []
-# - my-drone-secrets
+# - my-vela-secrets
 
-## The keys within the "env" map are mounted as environment variables on the Drone server pod.
-## See the full reference of Drone server environment variables here:
-## Ref: https://docs.drone.io/installation/reference/
+## The keys within the "env" map are mounted as environment variables on the Vela server pod.
 ##
 env:
-  ## REQUIRED: Set the user-visible Drone hostname, sans protocol.
-  ## Ref: https://docs.drone.io/installation/reference/drone-server-host/
-  ##
-  DRONE_SERVER_HOST: chart-example.local
+  ## Vela Server vars
+  ## Ref: https://github.com/go-vela/server/blob/master/cmd/vela-server/main.go
 
-  ## The protocol to pair with the value in DRONE_SERVER_HOST (http or https).
-  ## Ref: https://docs.drone.io/installation/reference/drone-server-proto/
-  ##
-  DRONE_SERVER_PROTO: http
-
-  ## REQUIRED: Set the secret secret token that the Drone server and its Runners will use
+  ## REQUIRED!
+  ## Set the secret secret token that the Vela server and its workers will use
   ## to authenticate. This is commented out in order to leave you the ability to set the
   ## key via a separately provisioned secret (see existingSecretName above).
-  ## Ref: https://docs.drone.io/installation/reference/drone-rpc-secret/
+  ## Usage: secret used for server <-> worker communication
   ##
-  # DRONE_RPC_SECRET:
+  # VELA_SECRET:
 
-  ## If you'd like to use a DB other than SQLite (the default), set a driver + DSN here.
-  ## Ref: https://docs.drone.io/installation/storage/database/
+  ## REQUIRED!
+  ## This address gets sent to Source provider (eg Github) to configure repo webhooks.
+  ## As such, it must be an address that is accessible to the Source provider.
+  ## Usage: server address as a fully qualified url (<scheme>://<host>)
   ##
-  # DRONE_DATABASE_DRIVER:
-  # DRONE_DATABASE_DATASOURCE:
+  VELA_ADDR: https://chart-example.local
 
-  ## If you are going to store build secrets in the Drone database, it is suggested that
+  ## vela-server will listen on this port (using all addresses similar to 0.0.0.0:<port>)
+  ## Usage: server port for the API to listen on
+  ##
+  VELA_PORT: "8080"
+
+  ## The UI's web address is used when creating comments/metadata with links back to
+  ## logs or other build info.
+  ## Usage: web ui address as a fully qualified url (<scheme>://<host>)
+  ##
+  # VELA_WEBUI_ADDR: https://chart-ui-example.local
+
+  ## REQUIRED!
+  ## You need to configure the queue that the server will use to pass work to the workers.
+  ##
+  ## Options: redis (stubs: kafka)
+  ## Usage: driver to be used for the queue
+  VELA_QUEUE_DRIVER: redis
+  ##
+  ## Usage: fully qualified url (<scheme>://<host>) for the queue
+  # VELA_QUEUE_ADDR:
+  ##
+  ## Usage: enables connecting to a queue cluster
+  # VELA_QUEUE_CLUSTER:
+  ##
+  ## Usage: list of routes (channels/topics) to publish builds
+  # VELA_QUEUE_ROUTES: "vela"
+  ##
+  ## Usage: timeout for requests that pop items off the queue
+  # VELA_QUEUE_POP_TIMEOUT: "60s"
+
+  ## If you'd like to use a DB other than SQLite (the default), set a driver + addr here.
+  ##
+  ## Options: sqlite3, postgres
+  ## Usage: driver to be used for the database system
+  # VELA_DATABASE_DRIVER: "sqlite3"
+  ##
+  ## Usage: fully qualified url (<scheme>://<host>) for the database
+  # VELA_DATABASE_ADDR: "vela.sqlite"
+
+  ## If you are going to store build secrets in the Vela database, it is suggested that
   ## you set a database encryption secret. This must be set before any secrets are stored
   ## in the database.
-  ## Ref: https://docs.drone.io/installation/storage/encryption/
   ##
-  # DRONE_DATABASE_SECRET:
+  ## Usage: AES-256 key for encrypting and decrypting values in the database
+  # VELA_DATABASE_ENCRYPTION_KEY:
 
-  ## If you are using self-hosted GitHub or GitLab, you'll need to set this to true.
-  ## Ref: https://docs.drone.io/installation/reference/drone-git-always-auth/
+  ## Source provider configuration
+
+  ## Usage: OAuth client id from version control system
+  # VELA_SOURCE_CLIENT:
   ##
-  # DRONE_GIT_ALWAYS_AUTH: false
-
-  ## ===================================================================================
-  ##                         Provider Directives (select ONE)
-  ## -----------------------------------------------------------------------------------
-  ## Select one provider (and only one). Refer to the corresponding documentation link
-  ## before filling the values in. Also note that you can use the 'secretMounts' value
-  ## if you'd rather not have secrets in Kubernetes Secret instead of a ConfigMap.
-  ## ===================================================================================
-
-  ## GitHub-specific variables. See the provider docs here:
-  ## Ref: https://docs.drone.io/installation/providers/github/
+  ## Usage: OAuth client secret from version control system
+  # VELA_SOURCE_SECRET:
   ##
-  # DRONE_GITHUB_CLIENT_ID:
-  # DRONE_GITHUB_CLIENT_SECRET:
-
-  ## GitLab-specific variables. See the provider docs here:
-  ## Ref: https://docs.drone.io/installation/providers/gitlab/
+  ## Options: github (stubs: gitlab)
+  ## Usage: driver to be used for the version control system (only github supported for now)
+  # VELA_SOURCE_DRIVER: "github"
   ##
-  # DRONE_GITLAB_CLIENT_ID:
-  # DRONE_GITLAB_CLIENT_SECRET:
-  # DRONE_GITLAB_SERVER:
-
-  ## Bitbucket Cloud-specific variables. See the provider docs here:
-  ## Ref: https://docs.drone.io/installation/providers/bitbucket-cloud/
+  ## Usage: fully qualified url (<scheme>://<host>) for the version control system
+  # VELA_SOURCE_ADDR: "https://github.com"
   ##
-  # DRONE_BITBUCKET_CLIENT_ID:
-  # DRONE_BITBUCKET_CLIENT_SECRET:
-
-  ## Bitbucket-specific variables. See the provider docs here:
-  ## Ref: https://docs.drone.io/installation/providers/bitbucket-server/
+  ## Usage: context for commit status in version control system
+  # VELA_SOURCE_CONTEXT: continuous-integration/vela
   ##
-  # DRONE_GIT_USERNAME:
-  # DRONE_GIT_PASSWORD:
-  # DRONE_STASH_CONSUMER_KEY:
-  # DRONE_STASH_PRIVATE_KEY:
-  # DRONE_STASH_SERVER:
+  ## Usage: OAuth scopes to be used for the version control system
+  # VELA_SOURCE_SCOPES: "repo,repo:status,user:email,read:user,read:org"
 
-  ## Gitea-specific variables. See the provider docs here:
-  ## Ref: https://docs.drone.io/installation/providers/gitea/
-  ##
-  # DRONE_GITEA_CLIENT_ID:
-  # DRONE_GITEA_CLIENT_SECRET:
-  # DRONE_GITEA_SERVER:
+  ## The Compiler has a separate set of Github credentials for retrieving templates.
 
-  ## Gogs-specific variables. See the provider docs here:
-  ## Ref: https://docs.drone.io/installation/providers/gogs/
+  ## Usage: github compiler driver
+  # VELA_COMPILER_GITHUB:
   ##
-  # DRONE_GOGS_SERVER:
+  ## Usage: github url, used by compiler, for pulling registry templates
+  # VELA_COMPILER_GITHUB_URL:
+  ##
+  ## Usage: github token, used by compiler, for pulling registry templates
+  # VELA_COMPILER_GITHUB_TOKEN:
+
+  ## Other misc Vela Database settings
+
+  ## Usage: maximum number of open connections to the database
+  # VELA_DATABASE_CONNECTION_OPEN: "0"
+  ##
+  ## Usage: maximum number of idle connections to the database
+  # VELA_DATABASE_CONNECTION_IDLE: "2"
+  ##
+  ## Usage: duration of time a connection may be reused for the database
+  # VELA_DATABASE_CONNECTION_LIFE: "30m"
+  ##
+  ## Usage: level of compression for logs stored in the database
+  # VELA_DATABASE_COMPRESSION_LEVEL: "3"
+  ##
+  ## Usage: enables skipping the creation of tables and indexes in the database
+  # VELA_DATABASE_SKIP_CREATION:
+
+  ## Other misc Vela server settings
+
+  ## Usage: set log level - options: (trace|debug|info|warn|error|fatal|panic)
+  # VELA_LOG_LEVEL: info
+  # VELA_DATABASE_LOG_LEVEL: info
+  # VELA_SECRET_LOG_LEVEL: info
+  # VELA_SOURCE_LOG_LEVEL: info
+  # VELA_QUEUE_LOG_LEVEL: info
+  ##
+  ## Usage: format of logs to output
+  # VELA_DATABASE_LOG_FORMAT: json
+  # VELA_SECRET_LOG_FORMAT: json
+  # VELA_SOURCE_LOG_FORMAT: json
+  # VELA_QUEUE_LOG_FORMAT: json
+  ##
+  ## Usage: determines whether or not webhook validation is disabled.  useful for local development.
+  # VELA_DISABLE_WEBHOOK_VALIDATION: "false"
+  ##
+  ## Usage: determines whether or not use cookies with secure flag set.  useful for testing.
+  # VELA_ENABLE_SECURE_COOKIE: "false"
+  ##
+  ## Usage: override default build timeout (minutes)
+  # VELA_DEFAULT_BUILD_TIMEOUT: ""
+  ##
+  ## Usage: sets the duration of the access token
+  # VELA_ACCESS_TOKEN_DURATION: "15m"
+  ##
+  ## Usage: sets the duration of the refresh token
+  # VELA_REFRESH_TOKEN_DURATION: "8h"
+  ##
+  ## Usage: interval at which workers will show as active within the /metrics endpoint
+  # VELA_WORKER_ACTIVE_INTERVAL: "5m"
+
+  ## Compiler Modification service (to modify pipelines)
+
+  ## Usage: modification address, used by compiler, endpoint to send pipeline for modification
+  # VELA_MODIFICATION_ADDR:
+  ##
+  ## Usage: modification secret, used by compiler, secret to allow connectivity between compiler and modification endpoint
+  # VELA_MODIFICATION_SECRET:
+  ##
+  ## Usage: modification timeout, used by compiler, duration that the modification http request will timeout after
+  # VELA_MODIFICATION_TIMEOUT: "8s"
+  ##
+  ## Usage: modification retries, used by compiler, number of http requires that the modification http request will fail after
+  # VELA_MODIFICATION_RETRIES: "5"
+
+  ## Vela Secrets using Vault
+
+  ## Usage: enables the vault secret driver
+  # VELA_SECRET_VAULT:
+  ##
+  ## Usage: fully qualified url (<scheme>://<host>) for the vault system
+  # VELA_SECRET_VAULT_ADDR:
+  ##
+  ## Usage: authentication method used to obtain token from vault system
+  # VELA_SECRET_VAULT_AUTH_METHOD:
+  ##
+  ## Usage: vault role used to connect to the auth/aws/login endpoint
+  # VELA_SECRET_VAULT_AWS_ROLE:
+  ##
+  ## Usage: prefix for k/v secrets in vault system e.g. secret/data/<prefix>/<path>
+  # VELA_SECRET_VAULT_PREFIX:
+  ##
+  ## Usage: frequency which the vault token should be renewed
+  # VELA_SECRET_VAULT_RENEWAL: "30m"
+  ##
+  ## Usage: token used to access vault system
+  # VELA_SECRET_VAULT_TOKEN:
+  ##
+  ## Usage: version for the kv backend for the vault system
+  # VELA_SECRET_VAULT_VERSION: "2"

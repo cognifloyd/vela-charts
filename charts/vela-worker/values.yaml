@@ -1,6 +1,6 @@
 image:
-  repository: drone/drone-runner-kube
-  tag: 1.0.0-beta.9
+  repository: target/vela-worker
+  tag: v0.9.0
   pullPolicy: IfNotPresent
 
 ## If you need to pull images from a private Docker image repository, pass in the name
@@ -48,7 +48,7 @@ topologySpreadConstraints: []
 #   whenUnsatisfiable: "DoNotSchedule"
 #   labelSelector:
 #     matchLabels:
-#       "app.kubernetes.io/name": drone-runner-kube
+#       "app.kubernetes.io/name": vela-worker
 
 service:
   type: ClusterIP
@@ -76,7 +76,7 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-## If you'd like to force the Drone runner to run on a specific node or set of nodes,
+## If you'd like to force the Vela worker to run on a specific node or set of nodes,
 ## set a selector here.
 ##
 nodeSelector: {}
@@ -102,7 +102,7 @@ extraVolumeMounts: []
 ## Kubernetes runner.
 ##
 extraSecretNamesForEnvFrom: []
-# - my-drone-secrets
+# - my-vela-secrets
 
 ## This chart always creates a unique serviceAccount to add appropriate Role/RoleBinding.
 serviceAccount:
@@ -127,25 +127,97 @@ rbac:
 ## Ref: https://kube-runner.docs.drone.io/installation/reference/
 ##
 env:
-  ## REQUIRED: Set the secret secret token that the Kubernetes runner and its runners will use
+  ## REQUIRED!
+  ## Set the secret secret token that the Vela server and its workers will use
   ## to authenticate. This is commented out in order to leave you the ability to set the
   ## key via a separately provisioned secret (see existingSecretName above).
-  ## Ref: https://kube-runner.docs.drone.io/installation/reference/drone-rpc-secret/
+  ## This should be the same as VELA_SECRET set on the server.
+  ## Usage: secret used for server <-> worker communication
   ##
-  # DRONE_RPC_SECRET:
+  # VELA_SERVER_SECRET:
 
-  ## The hostname/IP (and optionally the port) for your Kubernetes runner. Defaults to the "drone"
-  ## service that the drone server Chart creates by default.
-  ## Ref: https://kube-runner.docs.drone.io/installation/reference/drone-rpc-host/
+  ## REQUIRED!
+  ## Defaults to the "vela-server" service that the vela-server Chart creates by default.
+  ## Usage: Vela server address as a fully qualified url (<scheme>://<host>)
   ##
-  DRONE_RPC_HOST: drone
+  VELA_SERVER_ADDR: http://vela-server
 
-  ## The protocol to use for communication with Drone server.
-  ## Ref: https://kube-runner.docs.drone.io/installation/reference/drone-rpc-proto/
-  ##
-  DRONE_RPC_PROTO: http
+  ## This is the address that the worker will use to register with the server.
+  ## Every worker needs its own worker address.
+  ## Usage: Worker server address as a fully qualified url (<scheme>://<host>)
+  ## TODO: Generate this? maybe tpl it?
+  VELA_WORKER_ADDR: http://vela-worker
 
-  ## Determines the default Kubernetes namespace for Drone builds to run in.
-  ## Ref: https://kube-runner.docs.drone.io/installation/reference/drone-namespace-default/
+  ## The worker can serve API requests (metrics, health, etc) over HTTPS.
+  ## To use this, CERT and KEY should have the path to relevant TLS files.
   ##
-  DRONE_NAMESPACE_DEFAULT: default
+  ## Usage: optional TLS certificate for https
+  # VELA_SERVER_CERT:
+  ##
+  ## Usage: optional TLS certificate key
+  # VELA_SERVER_CERT_KEY:
+
+  ## REQUIRED!
+  ## You need to configure the queue that the server will use to pass work to the workers.
+  ##
+  ## Options: redis (stubs: kafka)
+  ## Usage: driver to be used for the queue
+  VELA_QUEUE_DRIVER: redis
+  ##
+  ## Usage: fully qualified url (<scheme>://<host>) for the queue
+  # VELA_QUEUE_ADDR:
+  ##
+  ## Usage: enables connecting to a queue cluster
+  # VELA_QUEUE_CLUSTER:
+  ##
+  ## Usage: list of routes (channels/topics) to publish builds
+  # VELA_QUEUE_ROUTES: "vela"
+  ##
+  ## Usage: timeout for requests that pop items off the queue
+  # VELA_QUEUE_POP_TIMEOUT: "60s"
+
+  ## Worker's executor settings
+  ##
+  ## Options: linux, local (stubs: darwin, windows)
+  ## Usage: driver to be used for the executor
+  VELA_EXECUTOR_DRIVER: linux
+
+  ## Worker's runtime settings
+  ##
+  ## Options: docker, kubernetes
+  ## Usage: driver to be used for the runtime
+  VELA_RUNTIME_DRIVER: kubernetes
+  ##
+  ## Usage: path to configuration file for the runtime
+  # VELA_RUNTIME_CONFIG:
+  ##
+  ## Determines the default Kubernetes namespace for Vela builds to run in.
+  ## Usage: namespace to use for the runtime (only used by kubernetes)
+  VELA_RUNTIME_NAMESPACE: default
+  ##
+  ## Usage: list of images allowed to run in privileged mode for the runtime
+  # VELA_RUNTIME_PRIVILEGED_IMAGES: target/vela-docker
+  ##
+  ## Usage: list of host volumes to mount for the runtime
+  # VELA_RUNTIME_VOLUMES:
+
+  ## Other misc Worker settings
+
+  ##
+  ## Usage: set log level - options: (trace|debug|info|warn|error|fatal|panic)
+  # VELA_LOG_LEVEL: info
+  # EXECUTOR_LOG_LEVEL: info
+  # RUNTIME_LOG_LEVEL: info
+  # VELA_QUEUE_LOG_LEVEL: info
+  ##
+  ## Usage: format of logs to output
+  # VELA_LOG_FORMAT: json
+  # EXECUTOR_LOG_FORMAT: json
+  # RUNTIME_LOG_FORMAT: json
+  # VELA_QUEUE_LOG_FORMAT: json
+  ##
+  ## Usage: maximum amount of builds that can run concurrently
+  # VELA_BUILD_LIMIT: "1"
+  ##
+  ## Usage: maximum amount of time a build can run for
+  # VELA_BUILD_TIMEOUT: "30m"

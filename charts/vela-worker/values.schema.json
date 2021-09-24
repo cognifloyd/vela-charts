@@ -183,16 +183,16 @@
       "$id": "#/properties/env",
       "type": "object",
       "required": [
-        "DRONE_RPC_HOST"
+        "WORKER_SERVER_ADDR"
       ],
       "properties": {
-        "DRONE_RPC_HOST": {
-          "$id": "#/properties/env/properties/DRONE_RPC_HOST",
+        "VELA_SERVER_ADDR": {
+          "$id": "#/properties/env/properties/VELA_SERVER_ADDR",
           "type": "string",
           "minLength": 1
         },
-        "DRONE_RPC_SECRET": {
-          "$id": "#/properties/env/properties/DRONE_RPC_SECRET",
+        "VELA_SERVER_SECRET": {
+          "$id": "#/properties/env/properties/VELA_SERVER_SECRET",
           "type": "string",
           "minLength": 1
         }
