@@ -1,23 +1,22 @@
 apiVersion: v2
-name: drone-runner-kube
-description: The Drone Kubernetes runner launches builds in Kubernetes Jobs
+name: vela-worker
+description: Worker for Vela (Target's official Pipeline Automation Framework)
 type: application
-version: 0.3.2
-appVersion: 1.0.0
+version: 0.1.0
+appVersion: 0.9.0
 kubeVersion: "^1.13.0-0"
-home: https://docs.drone.io/runner/kubernetes/
-icon: https://docs.drone.io/logo.svg
+home: https://go-vela.github.io/docs/
+icon: https://raw.githubusercontent.com/go-vela/docs/master/assets/icons/logo.svg
 keywords:
   - continuous-delivery
   - continuous-deployment
   - continuous-integration
   - docker
-  - drone
-  - drone.io
+  - vela
+  - go-vela
   - go
 sources:
-  - https://github.com/drone-runners/drone-runner-kube
-  - https://github.com/drone/charts
+  - https://github.com/go-vela/woerker
 maintainers:
-  - name: Drone
-    email: hello@drone.io
+  - name: Jacob Floyd
+    email: cognifloyd@gmail.com

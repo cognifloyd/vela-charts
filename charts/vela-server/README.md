@@ -1,46 +1,43 @@
-# Drone server
+# Vela server
 
-[Drone](http://drone.io/) is a Continuous Integration platform built on container technology with native Kubernetes support.
+[Vela](http://go-vela.github.io/docs/) is a Pipeline Automation (CI/CD) framework built on Linux container technology written in Golang.
 
-This Chart is for installing [Drone server](https://docs.drone.io/installation/overview/).
 
-## Installing Drone server
+This Chart is for installing Vela server.
 
-See the [drone chart installation guide](./docs/install.md).
+## Installing Vela server
 
-## Configuring Drone server
+See the [vela-server chart installation guide](./docs/install.md).
 
-See [values.yaml](values.yaml) to see the Chart's default values. Refer to the [Drone server reference](https://docs.drone.io/installation/reference/) for a more complete list of options.
+## Configuring Vela server
 
-To adjust an existing Drone install's configuration:
+See [values.yaml](values.yaml) to see the Chart's default values. Refer to the [Vela server sources](https://github.com/go-vela/server/blob/master/cmd/vela-server/main.go) for a more complete list of options.
+
+To adjust an existing Vela install's configuration:
 
 ```console
 # If you have a values file:
-helm upgrade drone drone/drone --namespace drone --values drone-values.yaml
+helm upgrade vela-server vela/vela-server --namespace vela --values vela-server-values.yaml
 # If you want to change one value and don't have a values file:
-helm upgrade drone drone/drone --namespace drone --reuse-values --set someKey=someVal
+helm upgrade vela-server vela/vela-server --namespace vela --reuse-values --set someKey=someVal
 ```
 
-## Upgrading Drone server
+## Upgrading Vela server
 
-Read the [release notes](https://discourse.drone.io/c/announcements/6) to make sure there are no backwards incompatible changes. Make adjustments to your values as needed, then run `helm upgrade`:
+Read the [release notes](https://github.com/go-vela/community/blob/master/migrations/v0.9/README.md) to make sure there are no backwards incompatible changes. Make adjustments to your values as needed, then run `helm upgrade`:
 
 ```console
-# This pulls the latest version of the drone chart from the repo.
+# This pulls the latest version of the vela-server chart from the repo.
 helm repo update
-helm upgrade drone drone/drone --namespace drone --values drone-values.yaml
+helm upgrade vela-server vela/vela-server --namespace vela --values vela-server-values.yaml
 ```
 
-## Uninstalling Drone server
+## Uninstalling Vela server
 
-To uninstall/delete the `drone` deployment in the `drone` namespace:
+To uninstall/delete the `vela-server` deployment in the `vela` namespace:
 
 ```console
-helm delete drone --namespace drone
+helm delete vela-server --namespace vela
 ```
 
 Substitute your values if they differ from the examples. See `helm delete --help` for a full reference on `delete` parameters and flags.
-
-## Support
-
-For questions, suggestions, and discussion, visit the [Drone community site](https://discourse.drone.io/).
