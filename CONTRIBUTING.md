@@ -1,10 +1,10 @@
-# Contributing to drone/charts
+# Contributing to cognifloyd/vela-charts
 
 Contributions to this repository are accepted and licensed under the [2-clause BSD license](LICENSE).
 
 ## Code of conduct
 
-Contributors must follow the [Drone community code of conduct](CODE_OF_CONDUCT.md).
+Contributors must follow the [code of conduct](CODE_OF_CONDUCT.md).
 
 ## How to contribute
 
@@ -14,12 +14,12 @@ Contributors must follow the [Drone community code of conduct](CODE_OF_CONDUCT.m
 
 ## Philosophical notes
 
-* This repository contains the charts necessary to deploy and operate Drone (and its supporting systems) on Kubernetes.
+* This repository contains the charts necessary to deploy and operate Vela (and its supporting systems) on Kubernetes.
 * The charts within are supplied as a starting point. They are not intended to support every possible Kubernetes configurable. The maintainability of a chart decreases for every additional templated line. We suggest forking the charts if you find yourself needing non-trivial modifications.
-* Drone-specific chart values should mirror the naming on the Drone documentation sites. For example, `env.DRONE_RPC_HOST` instead of `server.rpc.host`. This reduces the mental friction of having to map Kubernetes-specific naming to the more general Drone documentation.
+* Vela-specific chart values should mirror the naming on the Vela documentation sites. For example, `env.VELA_WEBUI_ADDR` instead of `server.webui.addr`. This reduces the mental friction of having to map Kubernetes-specific naming to the more general Vela documentation.
 
 ## Technical requirements
 
 * Commit(s) should be prefixed by the name of the chart that has been added or modified.
 * `helm lint` must pass for all charts.
-* New charts must include a README.md. See [drone-runner-kube](charts/drone-runner-kube/README.md) for an example.  
+* New charts must include a README.md.

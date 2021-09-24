@@ -1,6 +1,6 @@
-# Drone charts
+# Vela charts
 
-This directory contains the charts that are published to the Drone Helm chart repository. For more information on the repository, see the [README.md](../README.md) in the git repo root.
+This directory contains the charts that are published to the Vela Helm chart repository. For more information on the repository, see the [README.md](../README.md) in the git repo root.
 
 ## Chart tour
 
