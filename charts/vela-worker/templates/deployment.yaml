@@ -1,18 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "drone-runner-kube.fullname" . }}
+  name: {{ include "vela-worker.fullname" . }}
   labels:
-    {{- include "drone-runner-kube.labels" . | nindent 4 }}
+    {{- include "vela-worker.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "drone-runner-kube.selectorLabels" . | nindent 6 }}
+      {{- include "vela-worker.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "drone-runner-kube.selectorLabels" . | nindent 8 }}
+        {{- include "vela-worker.selectorLabels" . | nindent 8 }}
+      {{- if .Values.podLabels }}
+        {{ toYaml .Values.podLabels | nindent 8 }}
+      {{- end }}
       annotations:
         checksum/secrets: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       {{- if .Values.podAnnotations }}
@@ -29,30 +32,31 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      serviceAccountName: {{ include "drone-runner-kube.fullname" . }}
+      serviceAccountName: {{ include "vela-worker.fullname" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       containers:
-        - name: server
+        - name: worker
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
+            # TODO: worker supports serving https if certs are provided
             - name: http
-              containerPort: 3000
+              containerPort: 8080 # TODO: get port from .Values.env.VELA_WORKER_ADDR
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /healthz
-              port: 3000
-              scheme: HTTP
+              path: /health
+              port: 8080 # TODO: get port from .Values.env.VELA_WORKER_ADDR
+              scheme: HTTP # TODO: HTTPS
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           envFrom:
             - configMapRef:
-                name: {{ include "drone-runner-kube.fullname" . }}
+                name: {{ include "vela-worker.fullname" . }}
           {{- range .Values.extraSecretNamesForEnvFrom }}
             - secretRef:
                 name: {{ . }}
