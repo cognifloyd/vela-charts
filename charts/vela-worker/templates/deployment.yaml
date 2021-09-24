@@ -59,7 +59,7 @@ spec:
           env:
             - name: VELA_WORKER_ADDR
               {{/* TODO: multiple workers needs different template for service name */}}
-              value: {{ .Values.service.scheme }}://{{ include "vela-worker.fullname" }}:{{ .Values.service.port }}
+              value: {{ .Values.service.scheme }}://{{ include "vela-worker.fullname" . }}:{{ .Values.service.port }}
               {{/*
                  or maybe we can use
                  valueFrom:

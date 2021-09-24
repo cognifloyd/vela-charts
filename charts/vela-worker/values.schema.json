@@ -6,7 +6,6 @@
     "image",
     "imagePullSecrets",
     "topologySpreadConstraints",
-    "replicaCount",
     "terminationGracePeriodSeconds",
     "nameOverride",
     "fullnameOverride",
@@ -14,7 +13,6 @@
     "securityContext",
     "podAnnotations",
     "service",
-    "ingress",
     "resources",
     "nodeSelector",
     "tolerations",
@@ -52,11 +50,6 @@
     "imagePullSecrets": {
       "$id": "#/properties/imagePullSecrets",
       "type": "array"
-    },
-    "replicaCount": {
-      "$id": "#/properties/replicaCount",
-      "type": "integer",
-      "minimum": 0
     },
     "terminationGracePeriodSeconds": {
       "$id": "#/properties/terminationGracePeriodSeconds",
@@ -102,34 +95,6 @@
         "port": {
           "$id": "#/properties/service/properties/port",
           "type": "integer"
-        }
-      }
-    },
-    "ingress": {
-      "$id": "#/properties/ingress",
-      "type": "object",
-      "required": [
-        "enabled",
-        "annotations",
-        "hosts",
-        "tls"
-      ],
-      "properties": {
-        "enabled": {
-          "$id": "#/properties/ingress/properties/enabled",
-          "type": "boolean"
-        },
-        "annotations": {
-          "$id": "#/properties/ingress/properties/annotations",
-          "type": "object"
-        },
-        "hosts": {
-          "$id": "#/properties/ingress/properties/hosts",
-          "type": "array"
-        },
-        "tls": {
-          "$id": "#/properties/ingress/properties/tls",
-          "type": "array"
         }
       }
     },
@@ -183,7 +148,7 @@
       "$id": "#/properties/env",
       "type": "object",
       "required": [
-        "WORKER_SERVER_ADDR"
+        "VELA_SERVER_ADDR"
       ],
       "properties": {
         "VELA_SERVER_ADDR": {
