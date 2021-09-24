@@ -7,4 +7,5 @@ This directory contains the charts that are published to the Vela Helm chart rep
 A nonexhaustive overview of the charts:
 
 * [vela-server](vela-server/README.md) - Vela server
+* [vela-ui](vela-ui/README.md) - Vela Web UI
 * [vela-worker](vela-worker/README.md) - Vela worker (using the kubernetes runtime)
