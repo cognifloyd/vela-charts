@@ -25,7 +25,7 @@ entries:
     - https://github.com/go-vela/server
     type: application
     urls:
-    - docs/vela-server-0.1.0.tgz
+    - vela-server-0.1.0.tgz
     version: 0.1.0
   vela-ui:
   - apiVersion: v2
@@ -52,7 +52,7 @@ entries:
     - https://github.com/go-vela/ui
     type: application
     urls:
-    - docs/vela-ui-0.1.0.tgz
+    - vela-ui-0.1.0.tgz
     version: 0.1.0
   vela-worker:
   - apiVersion: v2
@@ -79,6 +79,6 @@ entries:
     - https://github.com/go-vela/worker
     type: application
     urls:
-    - docs/vela-worker-0.1.0.tgz
+    - vela-worker-0.1.0.tgz
     version: 0.1.0
 generated: "2021-09-25T17:37:14.090229579-05:00"
