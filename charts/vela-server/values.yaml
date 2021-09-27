@@ -207,6 +207,7 @@ env:
 
   ## You need to configure the queue that the server will use to pass work to the workers.
   ##
+  ## REQUIRED!
   ## Options: redis (stubs: kafka)
   ## Usage: driver to be used for the queue
   VELA_QUEUE_DRIVER: redis
@@ -214,7 +215,7 @@ env:
   ## REQUIRED!
   ## Make sure to adjust this if your redis host/cluster is not accessible on host "redis"
   ## Usage: fully qualified url (<scheme>://<host>) for the queue
-  VELA_QUEUE_ADDR: redis://redis:6379
+  # VELA_QUEUE_ADDR: redis://redis:6379
   ##
   ## Usage: enables connecting to a queue cluster
   # VELA_QUEUE_CLUSTER:
@@ -227,26 +228,27 @@ env:
 
   ## If you'd like to use a DB other than SQLite (the default), set a driver + addr here.
   ##
+  ## REQUIRED!
   ## Options: sqlite3, postgres
   ## Usage: driver to be used for the database system
   VELA_DATABASE_DRIVER: "sqlite3"
   ##
+  ## REQUIRED!
   ## Usage: fully qualified url (<scheme>://<host>) for the database
   ## For sqlite, see the URI Filename examples section in: https://www.sqlite.org/c3ref/open.html
   VELA_DATABASE_ADDR: "file:///data/vela.sqlite"
 
-  ## If you are going to store build secrets in the Vela database, it is suggested that
-  ## you set a database encryption secret. This must be set before any secrets are stored
-  ## in the database.
-  ##
+  ## REQUIRED!
   ## Usage: AES-256 key for encrypting and decrypting values in the database
   # VELA_DATABASE_ENCRYPTION_KEY:
 
   ## Source provider configuration
 
+  ## REQUIRED!
   ## Usage: OAuth client id from version control system
   # VELA_SOURCE_CLIENT:
   ##
+  ## REQUIRED!
   ## Usage: OAuth client secret from version control system
   # VELA_SOURCE_SECRET:
   ##
