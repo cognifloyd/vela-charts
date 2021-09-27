@@ -3,6 +3,32 @@ entries:
   vela-server:
   - apiVersion: v2
     appVersion: 0.9.2
+    created: "2021-09-27T12:47:41.257896568-05:00"
+    description: Vela is a Pipeline Automation (CI/CD) framework built on Linux container technology written in Golang.
+    digest: d3c6f543e23a5a4b173cf8226ab00d6407dd341819fade753c5db25cc3b34e3d
+    home: https://go-vela.github.io/docs/
+    icon: https://raw.githubusercontent.com/go-vela/docs/master/assets/icons/logo.svg
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - vela
+    - go-vela
+    - go
+    kubeVersion: ^1.13.0-0
+    maintainers:
+    - email: cognifloyd@gmail.com
+      name: Jacob Floyd
+    name: vela-server
+    sources:
+    - https://github.com/go-vela/server
+    type: application
+    urls:
+    - vela-server-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 0.9.2
     created: "2021-09-25T17:37:14.091581512-05:00"
     description: Vela is a Pipeline Automation (CI/CD) framework built on Linux container technology written in Golang.
     digest: 906a99d93e22dfcfa10f8c9401fd183d8c8e8813af80d2db6474ac5dfab24f92
@@ -81,4 +107,4 @@ entries:
     urls:
     - vela-worker-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-25T17:37:14.090229579-05:00"
+generated: "2021-09-27T12:47:41.252932536-05:00"
