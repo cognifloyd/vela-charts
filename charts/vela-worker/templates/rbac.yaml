@@ -28,22 +28,28 @@ rules:
   - apiGroups:
       - ""
     resources:
-      - secrets
+      - pods/log
     verbs:
-      - create
-      - delete
+      # github.com/go-vela/pkg-runtime/runtime/kubernetes/client.go
+      - get     # client.TailContainer
+      - list
+      - watch
   - apiGroups:
       - ""
     resources:
       - pods
-      - pods/log
     verbs:
-      - get
-      - create
-      - delete
-      - list
-      - watch
+      # github.com/go-vela/pkg-runtime/runtime/kubernetes/client.go
+      - create  # client.RunContainer
+      - patch   # client.RunContainer
+      - get     # client.InspectContainer
+                # ! client.InspectImage (only logs a noop 'kubectl get pod' command)
+                # ! client.InspectVolume (only logs a noop 'kubectl get pod' command)
+                # ! client.InspectNetwork (only logs a noop 'kubectl get pod' command)
+      - list    # client.TailContainer
       - update
+      - watch   # client.WaitContainer
+      - delete  # client.DeleteContainer
 {{ end -}}
 
 {{/* The role gets bound to the runner's ServiceAccount in the runner's namespace. */}}
