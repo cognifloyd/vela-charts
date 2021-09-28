@@ -83,6 +83,32 @@ entries:
   vela-worker:
   - apiVersion: v2
     appVersion: 0.9.0
+    created: "2021-09-27T20:24:12.619815808-05:00"
+    description: Worker for Vela (Target's official Pipeline Automation Framework)
+    digest: 1542f683d885686bad9643af4217854d8ebb88d2baee2a092d85aa64c45c212b
+    home: https://go-vela.github.io/docs/
+    icon: https://raw.githubusercontent.com/go-vela/docs/master/assets/icons/logo.svg
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - vela
+    - go-vela
+    - go
+    kubeVersion: ^1.13.0-0
+    maintainers:
+    - email: cognifloyd@gmail.com
+      name: Jacob Floyd
+    name: vela-worker
+    sources:
+    - https://github.com/go-vela/worker
+    type: application
+    urls:
+    - vela-worker-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: 0.9.0
     created: "2021-09-27T17:07:04.812861934-05:00"
     description: Worker for Vela (Target's official Pipeline Automation Framework)
     digest: aeda993693cfe063b9638c95c8cababed3f6ce253764f0f97d613bf0b3384d5d
@@ -133,4 +159,4 @@ entries:
     urls:
     - vela-worker-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-27T17:07:04.686092837-05:00"
+generated: "2021-09-27T20:24:12.598814793-05:00"
