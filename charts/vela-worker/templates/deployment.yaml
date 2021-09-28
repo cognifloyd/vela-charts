@@ -1,4 +1,3 @@
-{{/* TODO: multiple workers with one service (for dns) per worker */}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,9 +5,7 @@ metadata:
   labels:
     {{- include "vela-worker.labels" . | nindent 4 }}
 spec:
-  # Each worker needs a unique identity in VELA_WORKER_ADDR.
-  # So, each worker is essentially a singleton.
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "vela-worker.selectorLabels" . | nindent 6 }}
@@ -46,20 +43,19 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name:  {{ .Values.service.scheme | lower }}
-              containerPort: {{ .Values.service.port }}
+            - name:  {{ .Values.worker.scheme }}
+              containerPort: {{ .Values.worker.port }}
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /health
-              port: {{ .Values.service.port }}
-              scheme: {{ .Values.service.scheme | upper }}
+              port: {{ .Values.worker.port }}
+              scheme: {{ .Values.worker.scheme | upper }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-            - name: VELA_WORKER_ADDR_OLD
-              {{/* TODO: multiple workers needs different template for service name */}}
-              value: {{ .Values.service.scheme }}://{{ include "vela-worker.fullname" . }}:{{ .Values.service.port }}
+            - name: VELA_WORKER_ADDR_SCHEME
+              value: {{ .Values.worker.scheme }}
             - name: WORKER_POD_NAME
               valueFrom:
                 fieldRef:
@@ -68,21 +64,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-            - name: WORKER_POD_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
-            - name: WORKER_NODE_NAME
-              valueFrom:
-                fieldRef:
-                  fieldPath: spec.nodeName
-            - name: VELA_WORKER_ADDR_SCHEME
-              value: {{ .Values.service.scheme }}
             - name: VELA_WORKER_ADDR_PORT
-              value: {{ .Values.service.port | quote }}
+              value: {{ .Values.worker.port | quote }}
+            # it seems that using the pod name does not get a dns entry without a lot of unnecessary effort.
+            # So, here we use status.podIP instead of metadata.name
             - name: VELA_WORKER_ADDR
-              {{/* $() provides for k8s-level env substitution similar to bash ${} */}}
-              value: $(VELA_WORKER_ADDR_SCHEME)://$(WORKER_POD_NAME):$(VELA_WORKER_ADDR_PORT)
+              value: $(VELA_WORKER_ADDR_SCHEME)://$(WORKER_POD_IP):$(VELA_WORKER_ADDR_PORT)
           envFrom:
             - configMapRef:
                 name: {{ include "vela-worker.fullname" . }}

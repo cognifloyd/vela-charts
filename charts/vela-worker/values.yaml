@@ -10,6 +10,9 @@ image:
 imagePullSecrets: []
 # - name: "image-pull-secret"
 
+## Each worker is essentially a singleton identified by its IP. So, this is purely for scaling.
+replicaCount: 1
+
 ## TODO: validate this is true for Vela
 ## When the worker receives a SIGTERM/SIGINT (config update, upgrade, etc), it will wait until
 ## all jobs that particular pod has spawned complete. It is for this reason that you'll want
@@ -49,11 +52,10 @@ topologySpreadConstraints: []
 #     matchLabels:
 #       "app.kubernetes.io/name": vela-worker
 
-## This is used to generate a headless service so that the pods get dns entries
-## This is also used to generate the address that the worker will use to register
+## This is used to generate the address that the worker will use to register
 ## with the Vela server. That address is passed to the worker via VELA_WORKER_ADDR env.
-service:
-  type: ClusterIP
+worker:
+  # The worker will bind to this port
   port: 8080
   # scheme should be http or https.
   # If you use https, make sure to specify VELA_SERVER_CERT* paths in env and mount them with extraVolumes.

@@ -12,7 +12,7 @@
     "podSecurityContext",
     "securityContext",
     "podAnnotations",
-    "service",
+    "worker",
     "resources",
     "nodeSelector",
     "tolerations",
@@ -79,21 +79,21 @@
       "$id": "#/properties/topologySpreadConstraints",
       "type": "array"
     },
-    "service": {
-      "$id": "#/properties/service",
+    "worker": {
+      "$id": "#/properties/worker",
       "type": "object",
       "required": [
-        "type",
+        "scheme",
         "port"
       ],
       "properties": {
-        "type": {
-          "$id": "#/properties/service/properties/type",
+        "scheme": {
+          "$id": "#/properties/worker/properties/scheme",
           "type": "string",
-          "enum": ["ClusterIP", "ExternalName", "LoadBalancer", "NodePort"]
+          "enum": ["http", "https"]
         },
         "port": {
-          "$id": "#/properties/service/properties/port",
+          "$id": "#/properties/worker/properties/port",
           "type": "integer"
         }
       }
