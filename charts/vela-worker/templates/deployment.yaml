@@ -81,19 +81,25 @@ spec:
           volumeMounts:
             {{ toYaml . | nindent 12 }}
         {{- end }}
-    {{- if .Values.extraVolumes }}
+      {{- if .Values.extraVolumes }}
       volumes:
         {{ toYaml .Values.extraVolumes | nindent 8}}
-    {{- end }}
-    {{- with .Values.nodeSelector }}
+      {{- end }}
+      {{- if .Values.dnsPolicy }}
+      dnsPolicy: {{ .Values.dnsPolicy }}
+      {{- end }}
+      {{- with .Values.dnsConfig }}
+      dnsConfig: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.affinity }}
+      {{- end }}
+      {{- with .Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
+      {{- end }}
+      {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
-    {{- end }}
+      {{- end }}

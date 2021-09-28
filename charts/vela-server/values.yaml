@@ -90,6 +90,24 @@ tolerations: []
 
 affinity: {}
 
+## DNS settings (dnsPolicy, dnsConfig)
+
+## https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
+## "ClusterFirst" is the default. Other options: "Default", "ClusterFirstWithHostNet", "None"
+#dnsPolicy: "ClusterFirst"
+## https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-dns-config
+dnsConfig: {}
+  # example copied from the docs
+  #nameservers:
+  #- 1.2.3.4
+  #searches:
+  #- ns1.svc.cluster-domain.example
+  #- my.dns.search.suffix
+  #options:
+  #- name: ndots
+  #  value: "2"
+  #- name: edns0
+
 ## If you'd like to make additional files or volumes available to vela-server, declare additional
 ## Volumes here per the Pod spec's "volumes" section.
 ## Ref: https://kubernetes.io/docs/concepts/storage/volumes/
