@@ -83,9 +83,9 @@ entries:
   vela-worker:
   - apiVersion: v2
     appVersion: 0.9.0
-    created: "2021-09-27T20:24:12.619815808-05:00"
+    created: "2021-09-27T20:39:26.209774174-05:00"
     description: Worker for Vela (Target's official Pipeline Automation Framework)
-    digest: 1542f683d885686bad9643af4217854d8ebb88d2baee2a092d85aa64c45c212b
+    digest: 47ae84ab0ddca1bd3d37c5d861a252ab8f46f452c01f15476a720a4422eaf48f
     home: https://go-vela.github.io/docs/
     icon: https://raw.githubusercontent.com/go-vela/docs/master/assets/icons/logo.svg
     keywords:
@@ -159,4 +159,4 @@ entries:
     urls:
     - vela-worker-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-27T20:24:12.598814793-05:00"
+generated: "2021-09-27T20:39:26.202859439-05:00"
