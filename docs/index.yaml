@@ -2,9 +2,37 @@ apiVersion: v1
 entries:
   vela-server:
   - apiVersion: v2
+    appVersion: v0.12.1
+    created: "2022-03-02T17:23:14.334891869-06:00"
+    description: Vela is a Pipeline Automation (CI/CD) framework built on Linux container
+      technology written in Golang.
+    digest: b73fb3e77571eff3aa7bdc5dbef19c26f4bd9d512ef76d86c0cb5f8c4e4aab58
+    home: https://go-vela.github.io/docs/
+    icon: https://raw.githubusercontent.com/go-vela/docs/master/assets/icons/logo.svg
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - vela
+    - go-vela
+    - go
+    kubeVersion: ^1.13.0-0
+    maintainers:
+    - email: cognifloyd@gmail.com
+      name: Jacob Floyd
+    name: vela-server
+    sources:
+    - https://github.com/go-vela/server
+    type: application
+    urls:
+    - https://cognifloyd.github.io/drone-charts/vela-server-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
     appVersion: 0.9.2
     created: "2021-09-28T18:13:26.555156137-05:00"
-    description: Vela is a Pipeline Automation (CI/CD) framework built on Linux container technology written in Golang.
+    description: Vela is a Pipeline Automation (CI/CD) framework built on Linux container
+      technology written in Golang.
     digest: 45f39030ba10d3a0849b025738a474c9b41caf06105020ed7b9b9f5e9ef4a0b1
     home: https://go-vela.github.io/docs/
     icon: https://raw.githubusercontent.com/go-vela/docs/master/assets/icons/logo.svg
@@ -30,7 +58,8 @@ entries:
   - apiVersion: v2
     appVersion: 0.9.2
     created: "2021-09-27T12:47:41.257896568-05:00"
-    description: Vela is a Pipeline Automation (CI/CD) framework built on Linux container technology written in Golang.
+    description: Vela is a Pipeline Automation (CI/CD) framework built on Linux container
+      technology written in Golang.
     digest: d3c6f543e23a5a4b173cf8226ab00d6407dd341819fade753c5db25cc3b34e3d
     home: https://go-vela.github.io/docs/
     icon: https://raw.githubusercontent.com/go-vela/docs/master/assets/icons/logo.svg
@@ -56,7 +85,8 @@ entries:
   - apiVersion: v2
     appVersion: 0.9.2
     created: "2021-09-25T17:37:14.091581512-05:00"
-    description: Vela is a Pipeline Automation (CI/CD) framework built on Linux container technology written in Golang.
+    description: Vela is a Pipeline Automation (CI/CD) framework built on Linux container
+      technology written in Golang.
     digest: 906a99d93e22dfcfa10f8c9401fd183d8c8e8813af80d2db6474ac5dfab24f92
     home: https://go-vela.github.io/docs/
     icon: https://raw.githubusercontent.com/go-vela/docs/master/assets/icons/logo.svg
@@ -80,6 +110,32 @@ entries:
     - vela-server-0.1.0.tgz
     version: 0.1.0
   vela-ui:
+  - apiVersion: v2
+    appVersion: v0.13.0
+    created: "2022-03-02T17:23:14.335570974-06:00"
+    description: UI for Vela (Target's official Pipeline Automation Framework)
+    digest: 58017480e1c8908dee88f67b97ac60305a53d74841f5abce71afe7691d41a7c2
+    home: https://go-vela.github.io/docs/
+    icon: https://raw.githubusercontent.com/go-vela/docs/master/assets/icons/logo.svg
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - vela
+    - go-vela
+    - go
+    kubeVersion: ^1.13.0-0
+    maintainers:
+    - email: cognifloyd@gmail.com
+      name: Jacob Floyd
+    name: vela-ui
+    sources:
+    - https://github.com/go-vela/ui
+    type: application
+    urls:
+    - https://cognifloyd.github.io/drone-charts/vela-ui-0.3.0.tgz
+    version: 0.3.0
   - apiVersion: v2
     appVersion: v0.10.0
     created: "2021-09-28T18:13:26.556865203-05:00"
@@ -133,6 +189,32 @@ entries:
     - vela-ui-0.1.0.tgz
     version: 0.1.0
   vela-worker:
+  - apiVersion: v2
+    appVersion: v0.12.0
+    created: "2022-03-02T17:23:14.336374186-06:00"
+    description: Worker for Vela (Target's official Pipeline Automation Framework)
+    digest: 785f8abbbd5d0a6ec84d2928d55c29128fa215e1186c97f261cb481621e01ae1
+    home: https://go-vela.github.io/docs/
+    icon: https://raw.githubusercontent.com/go-vela/docs/master/assets/icons/logo.svg
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - vela
+    - go-vela
+    - go
+    kubeVersion: ^1.13.0-0
+    maintainers:
+    - email: cognifloyd@gmail.com
+      name: Jacob Floyd
+    name: vela-worker
+    sources:
+    - https://github.com/go-vela/worker
+    type: application
+    urls:
+    - https://cognifloyd.github.io/drone-charts/vela-worker-0.6.0.tgz
+    version: 0.6.0
   - apiVersion: v2
     appVersion: 0.9.0
     created: "2021-09-28T18:13:26.583762491-05:00"
@@ -263,4 +345,4 @@ entries:
     urls:
     - vela-worker-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-28T18:13:26.537789383-05:00"
+generated: "2022-03-02T17:23:14.33361072-06:00"
