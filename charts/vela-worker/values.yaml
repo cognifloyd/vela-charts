@@ -1,6 +1,6 @@
 image:
   repository: target/vela-worker
-  tag: v0.9.0
+  tag: v0.12.0
   pullPolicy: IfNotPresent
 
 ## If you need to pull images from a private Docker image repository, pass in the name
@@ -32,6 +32,9 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
+
+## Add extra annotations to the Vela worker deployment here.
+deploymentAnnotations: {}
 
 ## Add extra annotations to the Vela worker pods here.
 ##
@@ -217,15 +220,9 @@ env:
   ##
   ## Usage: set log level - options: (trace|debug|info|warn|error|fatal|panic)
   # VELA_LOG_LEVEL: info
-  # EXECUTOR_LOG_LEVEL: info
-  # RUNTIME_LOG_LEVEL: info
-  # VELA_QUEUE_LOG_LEVEL: info
   ##
   ## Usage: format of logs to output
   # VELA_LOG_FORMAT: json
-  # EXECUTOR_LOG_FORMAT: json
-  # RUNTIME_LOG_FORMAT: json
-  # VELA_QUEUE_LOG_FORMAT: json
   ##
   ## Usage: maximum amount of builds that can run concurrently
   # VELA_BUILD_LIMIT: "1"

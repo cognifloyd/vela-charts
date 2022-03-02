@@ -11,6 +11,7 @@
     "fullnameOverride",
     "podSecurityContext",
     "securityContext",
+    "deploymentAnnotations",
     "podAnnotations",
     "worker",
     "resources",
@@ -69,6 +70,10 @@
     },
     "securityContext": {
       "$id": "#/properties/securityContext",
+      "type": "object"
+    },
+    "deploymentAnnotations": {
+      "$id": "#/properties/deploymentAnnotations",
       "type": "object"
     },
     "podAnnotations": {

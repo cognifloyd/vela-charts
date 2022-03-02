@@ -1,6 +1,6 @@
 image:
   repository: target/vela-server
-  tag: v0.9.2
+  tag: v0.12.1
   pullPolicy: IfNotPresent
 
 ## If you need to pull images from a private Docker image repository, pass in the name
@@ -41,6 +41,9 @@ serviceAccount:
   # If a pod does not have pull secrets, k8s will use the service account's pull secrets.
   # See: https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#serviceaccount-admission-controller
   # pullSecret: "your-pull-secret"
+
+## Add extra annotations to the Vela server deployment here.
+deploymentAnnotations: {}
 
 ## Add extra annotations to the Vela server pods here. See below example for
 ## Prometheus scrape annotations.
@@ -260,28 +263,28 @@ env:
   ## Usage: AES-256 key for encrypting and decrypting values in the database
   # VELA_DATABASE_ENCRYPTION_KEY:
 
-  ## Source provider configuration
+  ## SCM provider configuration
 
   ## REQUIRED!
   ## Usage: OAuth client id from version control system
-  # VELA_SOURCE_CLIENT:
+  # VELA_SCM_CLIENT:
   ##
   ## REQUIRED!
   ## Usage: OAuth client secret from version control system
-  # VELA_SOURCE_SECRET:
+  # VELA_SCM_SECRET:
   ##
   ## Options: github (stubs: gitlab)
   ## Usage: driver to be used for the version control system (only github supported for now)
-  # VELA_SOURCE_DRIVER: "github"
+  # VELA_SCM_DRIVER: "github"
   ##
   ## Usage: fully qualified url (<scheme>://<host>) for the version control system
-  # VELA_SOURCE_ADDR: "https://github.com"
+  # VELA_SCM_ADDR: "https://github.com"
   ##
   ## Usage: context for commit status in version control system
-  # VELA_SOURCE_CONTEXT: continuous-integration/vela
+  # VELA_SCM_CONTEXT: continuous-integration/vela
   ##
   ## Usage: OAuth scopes to be used for the version control system
-  # VELA_SOURCE_SCOPES: "repo,repo:status,user:email,read:user,read:org"
+  # VELA_SCM_SCOPES: "repo,repo:status,user:email,read:user,read:org"
 
   ## The Compiler has a separate set of Github credentials for retrieving templates.
 
@@ -311,29 +314,27 @@ env:
   ## Usage: enables skipping the creation of tables and indexes in the database
   # VELA_DATABASE_SKIP_CREATION:
 
+  ## Build Limits
+
+  ## Usage: override default concurrent build limit
+  # VELA_DEFAULT_BUILD_LIMIT: "10"
+  ##
+  ## Usage: override max concurrent build limit
+  # VELA_MAX_BUILD_LIMIT: "30"
+  ##
+  ## Usage: override default build timeout (minutes)
+  # VELA_DEFAULT_BUILD_TIMEOUT: "30"
+
   ## Other misc Vela server settings
 
   ## Usage: set log level - options: (trace|debug|info|warn|error|fatal|panic)
   # VELA_LOG_LEVEL: info
-  # VELA_DATABASE_LOG_LEVEL: info
-  # VELA_SECRET_LOG_LEVEL: info
-  # VELA_SOURCE_LOG_LEVEL: info
-  # VELA_QUEUE_LOG_LEVEL: info
-  ##
-  ## Usage: format of logs to output
-  # VELA_DATABASE_LOG_FORMAT: json
-  # VELA_SECRET_LOG_FORMAT: json
-  # VELA_SOURCE_LOG_FORMAT: json
-  # VELA_QUEUE_LOG_FORMAT: json
   ##
   ## Usage: determines whether or not webhook validation is disabled.  useful for local development.
   # VELA_DISABLE_WEBHOOK_VALIDATION: "false"
   ##
   ## Usage: determines whether or not use cookies with secure flag set.  useful for testing.
   # VELA_ENABLE_SECURE_COOKIE: "false"
-  ##
-  ## Usage: override default build timeout (minutes)
-  # VELA_DEFAULT_BUILD_TIMEOUT: ""
   ##
   ## Usage: sets the duration of the access token
   # VELA_ACCESS_TOKEN_DURATION: "15m"

@@ -1,6 +1,6 @@
 image:
   repository: target/vela-ui
-  tag: v0.10.0
+  tag: v0.13.0
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
 
@@ -23,6 +23,9 @@ fullnameOverride: ""
 ## the name and any annotations here.
 serviceAccount:
   name: default
+
+## Add extra annotations to the Vela UI deployment here.
+deploymentAnnotations: {}
 
 podAnnotations: {}
 

@@ -10,6 +10,7 @@
     "fullnameOverride",
     "podSecurityContext",
     "securityContext",
+    "deploymentAnnotations",
     "podAnnotations",
     "serviceAccount",
     "service",
@@ -68,6 +69,10 @@
     },
     "securityContext": {
       "$id": "#/properties/securityContext",
+      "type": "object"
+    },
+    "deploymentAnnotations": {
+      "$id": "#/properties/deploymentAnnotations",
       "type": "object"
     },
     "podAnnotations": {

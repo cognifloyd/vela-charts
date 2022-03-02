@@ -10,6 +10,7 @@
     "podSecurityContext",
     "securityContext",
     "serviceAccount",
+    "deploymentAnnotations",
     "podAnnotations",
     "podLabels",
     "service",
@@ -97,6 +98,10 @@
           "type": "string"
         }
       }
+    },
+    "deploymentAnnotations": {
+      "$id": "#/properties/deploymentAnnotations",
+      "type": "object"
     },
     "podAnnotations": {
       "$id": "#/properties/podAnnotations",
