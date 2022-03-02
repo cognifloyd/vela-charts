@@ -12,7 +12,7 @@ publish:
 	@helm package -u -d temp charts/vela-server
 	@helm package -u -d temp charts/vela-ui
 	@helm package -u -d temp charts/vela-worker
-	@helm repo index --debug --url=https://cognifloyd.github.io/drone-charts --merge docs/index.yaml temp
+	@helm repo index --debug --url=https://cognifloyd.github.io/vela-charts --merge docs/index.yaml temp
 	@mv temp/vela*.tgz docs
 	@mv temp/index.yaml docs/index.yaml
 	@rm -rf temp
