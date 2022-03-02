@@ -3,10 +3,10 @@ entries:
   vela-server:
   - apiVersion: v2
     appVersion: v0.12.1
-    created: "2022-03-02T17:23:14.334891869-06:00"
+    created: "2022-03-02T17:38:42.350360399-06:00"
     description: Vela is a Pipeline Automation (CI/CD) framework built on Linux container
       technology written in Golang.
-    digest: b73fb3e77571eff3aa7bdc5dbef19c26f4bd9d512ef76d86c0cb5f8c4e4aab58
+    digest: 1e971d1861ff2d5ea718d3386b91376aa6f2a83f04057533d834e3e48d250460
     home: https://go-vela.github.io/docs/
     icon: https://raw.githubusercontent.com/go-vela/docs/master/assets/icons/logo.svg
     keywords:
@@ -112,9 +112,9 @@ entries:
   vela-ui:
   - apiVersion: v2
     appVersion: v0.13.0
-    created: "2022-03-02T17:23:14.335570974-06:00"
+    created: "2022-03-02T17:38:42.350990543-06:00"
     description: UI for Vela (Target's official Pipeline Automation Framework)
-    digest: 58017480e1c8908dee88f67b97ac60305a53d74841f5abce71afe7691d41a7c2
+    digest: caa90851dae2b1c8c463d577176f2887303c4cad78377c66e831370520936492
     home: https://go-vela.github.io/docs/
     icon: https://raw.githubusercontent.com/go-vela/docs/master/assets/icons/logo.svg
     keywords:
@@ -191,9 +191,9 @@ entries:
   vela-worker:
   - apiVersion: v2
     appVersion: v0.12.0
-    created: "2022-03-02T17:23:14.336374186-06:00"
+    created: "2022-03-02T17:38:42.351814544-06:00"
     description: Worker for Vela (Target's official Pipeline Automation Framework)
-    digest: 785f8abbbd5d0a6ec84d2928d55c29128fa215e1186c97f261cb481621e01ae1
+    digest: f8e162bb25d9b21b0b85184013ea8a4304504dc094adf04a7b8f91528716a862
     home: https://go-vela.github.io/docs/
     icon: https://raw.githubusercontent.com/go-vela/docs/master/assets/icons/logo.svg
     keywords:
@@ -345,4 +345,4 @@ entries:
     urls:
     - vela-worker-0.1.0.tgz
     version: 0.1.0
-generated: "2022-03-02T17:23:14.33361072-06:00"
+generated: "2022-03-02T17:38:42.348787766-06:00"
