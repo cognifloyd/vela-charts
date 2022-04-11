@@ -53,7 +53,7 @@ rules:
   - apiGroups:
       - "go-vela.github.io"
     resources:
-      - pipelinepodstemplate
+      - pipelinepodstemplates
     verbs:
       - get
       - list
