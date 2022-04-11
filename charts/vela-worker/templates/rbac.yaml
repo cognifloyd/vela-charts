@@ -50,6 +50,14 @@ rules:
       - update
       - watch   # client.WaitContainer
       - delete  # client.DeleteContainer
+  - apiGroups:
+      - "go-vela.github.io"
+    resources:
+      - pipelinepodstemplate
+    verbs:
+      - get
+      - list
+      - watch
 {{ end -}}
 
 {{/* The role gets bound to the runner's ServiceAccount in the runner's namespace. */}}

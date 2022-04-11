@@ -2,8 +2,8 @@ apiVersion: v2
 name: vela-worker
 description: Worker for Vela (Target's official Pipeline Automation Framework)
 type: application
-version: 0.6.0
-appVersion: v0.12.0
+version: 0.7.0
+appVersion: v0.13.0
 kubeVersion: "^1.13.0-0"
 home: https://go-vela.github.io/docs/
 icon: https://raw.githubusercontent.com/go-vela/docs/master/assets/icons/logo.svg
