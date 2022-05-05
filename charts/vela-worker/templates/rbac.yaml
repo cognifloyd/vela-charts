@@ -29,6 +29,7 @@ rules:
       - ""
     resources:
       - pods/log
+      - events
     verbs:
       # github.com/go-vela/pkg-runtime/runtime/kubernetes/client.go
       - get     # client.TailContainer
